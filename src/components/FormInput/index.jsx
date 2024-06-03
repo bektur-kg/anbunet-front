@@ -1,6 +1,8 @@
 import React from 'react';
 import {formRules} from "../../utils/formRules.js";
 
+
+   
 const FormInput = (
     {
         inputType,
@@ -8,7 +10,8 @@ const FormInput = (
         register,
         registerName,
         regexName,
-        error
+        error,
+        pre_function
     }) => {
     return (
         <label className={"w-full mb-4 rounded"}>
@@ -17,6 +20,7 @@ const FormInput = (
                 type={inputType}
                 placeholder={placeholder}
                 {...register(registerName, formRules[regexName])}
+                onChange={pre_function}
             />
             <span className={"text-red-400 text-sm"}>{error}</span>
         </label>

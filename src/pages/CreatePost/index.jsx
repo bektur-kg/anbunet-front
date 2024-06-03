@@ -5,6 +5,21 @@ import {requests} from "../../api/requests.js";
 
 
 const CreatePost = () => {
+
+    
+    const [image, setImage] = useState(null)
+    const onImageChange = (event) => {
+        if(event){
+          console.log(event)
+       if (event.target.files && event.target.files[0]) {
+         setImage(URL.createObjectURL(event.target.files[0]));
+       }
+       if(!event.target.value.includes('fakepath')) {setDescription(event.target.value)}
+      } else {setImage(imgplace);
+    
+        
+       };
+       }
     const {
         register,
         handleSubmit,
@@ -32,8 +47,10 @@ const CreatePost = () => {
                 handleSubmit={handleSubmit}
                 isValid={isValid}
                 submitRequestHandler={createPostHandler}
+                pre_function_input={onImageChange}
             />
             <div className={"text-red-400 mt-10 text-center"}>{responseError}</div>
+            <img alt="preview image" src={image}/>
         </div>
     );
 };

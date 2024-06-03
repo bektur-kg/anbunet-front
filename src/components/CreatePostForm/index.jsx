@@ -7,7 +7,8 @@ const CreatePostForm = (
         register,
         isValid,
         errors,
-        submitRequestHandler
+        submitRequestHandler,
+        pre_function_input
     }) => {
     return (
         <div className={"border py-10 px-5 rounded bg-white/65 rounded-2xl"}>
@@ -25,6 +26,7 @@ const CreatePostForm = (
                         registerName={"file"}
                         register={register}
                         error={errors?.file?.message}
+                        pre_function={pre_function_input}
                     />
                     <FormInput
                         inputType={"text"}
@@ -35,6 +37,7 @@ const CreatePostForm = (
                         regexName={"postDescription"}
                     />
                 </div>
+                <img src="" alt="" />
                 <div>
                     <Button
                         isActive={isValid}

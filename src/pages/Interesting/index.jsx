@@ -4,8 +4,8 @@ import {Loader, Post} from "../../components";
 
 const Interesting = () => {
     const [posts, setPosts] = useState()
-    const [page, setPage] = useState(1)
-    const PAGE_SIZE = 20
+    const [page, setPage] = useState(2)
+    const PAGE_SIZE = 21
 
     useEffect(() => {
         requests.getInterestingPosts(page, PAGE_SIZE)

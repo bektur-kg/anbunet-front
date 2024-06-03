@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const instance = axios.create({baseURL: "https://localhost:7199/"})
+const instance = axios.create({baseURL: "https://localhost:7199/api/"})
 
 export const requests = {
     register: (data) => instance.post("/api/users/register", data),
