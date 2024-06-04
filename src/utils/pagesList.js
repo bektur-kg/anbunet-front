@@ -49,4 +49,9 @@ export const privatePagesList = [
         path: '/createPost',
         Component: CreatePost
     },
+    {
+        id: 6,
+        path: '/search',
+        Component: Search
+    },
 ]
