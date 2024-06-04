@@ -217,7 +217,7 @@ const Profile = () => {
     console.log(profileData)
 
     useEffect(() => {
-        requests.getUserProfile(1).then(res => setProfileData(res.data))
+        requests.getUserProfile(10002).then(res => setProfileData(res.data))
     }, []);
 
     if(!profileData) return <Loader/>

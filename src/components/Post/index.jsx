@@ -25,7 +25,7 @@ const Post = (
                     login={user.login}
                     profilePicture={user.profilePicture}
                 />
-                <div className={"w-full h-card"}>
+                <div className={"w-full h-auto"}>
                     {
                         isMediaVideo ?
                             <video
@@ -39,7 +39,7 @@ const Post = (
                             <img
                                 src={`${mediaUrl}`.replace("https://localhost:7199/http", "http")} 
                                 alt="postImage"
-                                className={"w-full h-full object-cover rounded"}
+                                className={"w-full h-full object-scale-down rounded"}
                             />
                     }
                 </div>
