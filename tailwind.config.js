@@ -8,6 +8,10 @@ export default {
     extend: {
       height:{
         'card': '38rem',
+        'story': '34rem',
+      },
+      width:{
+        'story': '30rem'
       }
     },
   },

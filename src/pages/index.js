@@ -7,6 +7,7 @@ import Interesting from './Interesting'
 import Search from './Search'
 import Chat from './Chat'
 import CreatePost from "./CreatePost"
+import EditProfile from './EditProfile'
 
 export {
     Profile,
@@ -17,5 +18,6 @@ export {
     Interesting,
     Search,
     Chat,
-    CreatePost
+    CreatePost,
+    EditProfile
 }

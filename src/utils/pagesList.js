@@ -1,4 +1,4 @@
-import {Login, Main, Interesting, NotFound, Register, Profile, Search, Chat, CreatePost} from '../pages'
+import {Login, Main, Interesting, NotFound, Register, Profile, Search, Chat, CreatePost, EditProfile} from '../pages'
 
 export const publicPagesList = [
     {
@@ -48,5 +48,10 @@ export const privatePagesList = [
         id: 5,
         path: '/createPost',
         Component: CreatePost
+    },
+    {
+        id: 6,
+        path: '/profile/edit',
+        Component: EditProfile
     },
 ]

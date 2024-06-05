@@ -7,6 +7,11 @@ import PostUser from './PostUser'
 import Post from './Post'
 import CreatePostForm from "./CreatePostForm";
 import Actual from './Acutal'
+import StoryModal from './StoryModal'
+import StoryCard from "./StoryCard";
+import EditProfileForm from "./EditProfileForm";
+import FormTextarea from './FormTextarea'
+import FormSelect from './FormSelect'
 
 export{
     Logo,
@@ -17,5 +22,10 @@ export{
     PostUser,
     CreatePostForm,
     Post,
-    Actual
+    Actual,
+    StoryModal,
+    StoryCard,
+    EditProfileForm,
+    FormTextarea,
+    FormSelect
 }
