@@ -1,11 +1,38 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {requests} from "../../api/requests.js";
+import {Loader, Post} from "../../components";
 
-const Main = () => {
+const Interesting = () => {
+    const [posts, setPosts] = useState()
+    const [page, setPage] = useState(2)
+    const userId = 1
+
+    useEffect(() => {
+        requests.getUserFollowedPosts(userId)
+            .then(res => setPosts(res.data))
+    }, [])
+
+    console.log(posts)
+
+    if (!posts) return <Loader/>
     return (
-        <div className={"px-20 py-24"}>
-            main
+        <div className={"px-20 py-24 w-1/2 mx-auto"}>
+            {
+                posts?.map(p => (
+                    <Post
+                        key={p.id}
+                        id={p.id}
+                        mediaUrl={p.mediaUrl}
+                        description={p.description}
+                        comments={p.comments}
+                        createdDate={p.createdDate}
+                        likes={p.likes}
+                        user={p.user}
+                    />
+                ))
+            }
         </div>
     );
 };
 
-export default Main;
+export default Interesting;

@@ -17,7 +17,7 @@ const Interesting = () => {
     return (
         <div className={"px-20 py-24 w-1/2 mx-auto"}>
             {
-                posts?.map(p => (
+                posts?.toReversed().map(p => (
                     <Post
                         key={p.id}
                         id={p.id}

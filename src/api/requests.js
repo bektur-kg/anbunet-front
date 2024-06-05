@@ -34,4 +34,9 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
     }),
+    getUserFollowedPosts: () => instance.get(`https://localhost:7199/api/posts/followers?page=1&quantity=5`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+    }),
 }
