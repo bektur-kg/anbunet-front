@@ -4,10 +4,14 @@ const PostUser = (
     {
         id,
         login,
-        profilePicture
+        profilePicture,
+        onClick
     }) => {
     return (
-        <div className={"flex items-center gap-3"}>
+        <div
+            className={"flex items-center gap-3 cursor-pointer"}
+            onClick={onClick}
+        >
             <div>
                 <img
                     className={"w-10 h-10 rounded-full"}

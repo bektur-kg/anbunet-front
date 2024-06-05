@@ -19,6 +19,7 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),
+
     getUserSearch: (login) => instance.get(`users?login=${login}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -38,5 +39,15 @@ export const requests = {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
+    updateUserProfile: (data) => instance.patch("/api/users/update", data, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
+    updateUserProfilePicture: (data) => instance.put("/api/users/update_profile_picture", data, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
     }),
 }
