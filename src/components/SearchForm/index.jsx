@@ -9,7 +9,8 @@ const SearchForm = (
         register,
         isValid,
         errors,
-        submitRequestHandler
+        submitRequestHandler,
+        pre_function_input
     }) => {
     return (
         <div className={"border py-10 px-5 rounded bg-white/65"}>
@@ -28,6 +29,7 @@ const SearchForm = (
                         register={register}
                         error={errors?.login?.message}
                         regexName={"login"}
+                        pre_function={pre_function_input}
                     />
                 </div>
                 <div>

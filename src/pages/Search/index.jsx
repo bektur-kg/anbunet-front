@@ -4,6 +4,8 @@ import {requests} from "../../api/requests.js";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import SearchForm from '../../components/SearchForm/index.jsx';
+import {Link} from "react-router-dom";
+import ProfilePicture from '../../components/ProfilePicture/ProfilePicture.jsx';
 
 
 const Search = () => {
@@ -54,9 +56,19 @@ const Search = () => {
                 <p className={"text-red-400 text-xl "}>{responseError}</p>
             </div>
                 <div >
+                    
                 { 
                     searchResults.map(i => (
-                      <div className={"mx-auto py-2 px-3 rounded bg-white/65"} key={i.login}>{i.login&&i.login}</div>
+                      <div key={i.login} className={"mx-auto py-2 px-3 rounded bg-white/65 flex flex-row items-center"} key={i.login}>{i.login&&<>
+                      
+                      <ProfilePicture r={16}/>
+                        <Link
+                        className={"text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5"}
+                        to={"/profile" }
+                    >{i.login}</Link></>
+                        
+                         
+                        }</div>
                     ))
                 }
 

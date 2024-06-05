@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Loader, Post} from "../../components";
 import {requests} from "../../api/requests.js";
 import Acutal from "../../components/Acutal/index.jsx";
+import FollowersNumber from '../../components/FollowersNumber/FollowersNumber.jsx';
 
 const Profile = () => {
     const [profileData, setProfileData] = useState()
@@ -242,14 +243,7 @@ const Profile = () => {
                                 <span className={"font-bold text-emerald-500"}>10</span>
                                 <span>posts</span>
                             </div>
-                            <div className={"flex items-center gap-1 cursor-pointer"}>
-                                <span className={"font-bold text-emerald-500"}>10</span>
-                                <span>followers</span>
-                            </div>
-                            <div className={"flex items-center gap-1 cursor-pointer"}>
-                                <span className={"font-bold text-emerald-500"}>10</span>
-                                <span>followings</span>
-                            </div>
+                            <FollowersNumber/>
                         </div>
                         <div className={"mt-4"}>
                             <div className={"text-sm italic"}>{profileData.fullname} Bektur Toktbobekov Altynbekovich</div>

@@ -23,8 +23,15 @@ export const requests = {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
-        
-
-        
+    }),
+    getUserFollowings: (login) => instance.get(`users?login=${login}`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+    }),
+    getUserFollowers: (login) => instance.get(`users?login=${login}`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
     }),
 }
