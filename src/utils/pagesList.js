@@ -26,7 +26,7 @@ export const privatePagesList = [
     },
     {
         id: 1,
-        path: '/profile',
+        path: '/profile/:id?',
         Component: Profile
     },
     {

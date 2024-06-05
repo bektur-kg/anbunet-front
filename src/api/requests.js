@@ -24,12 +24,12 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
     }),
-    getUserFollowings: (login) => instance.get(`users?login=${login}`, {
+    getUserFollowings: (userId) => instance.get(`https://localhost:7199/followings/${userId}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
     }),
-    getUserFollowers: (login) => instance.get(`users?login=${login}`, {
+    getUserFollowers: (userId) => instance.get(`https://localhost:7199/followers/${userId}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },

@@ -1,10 +1,19 @@
 import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router';
 import {Button, Loader, Post} from "../../components";
 import {requests} from "../../api/requests.js";
 import Acutal from "../../components/Acutal/index.jsx";
 import FollowersNumber from '../../components/FollowersNumber/FollowersNumber.jsx';
 
 const Profile = () => {
+    
+    const userId2 = useParams()
+    const initValue = (userId2.id? userId2.id : 1);
+    console.log(initValue)
+    const [userId, setUserId] = useState(initValue)
+
+   
+    
     const [profileData, setProfileData] = useState()
 
     const acutals = [
@@ -218,7 +227,10 @@ const Profile = () => {
     console.log(profileData)
 
     useEffect(() => {
-        requests.getUserProfile(10002).then(res => setProfileData(res.data))
+      
+        requests.getUserProfile(userId).then(res => setProfileData(res.data));
+
+        
     }, []);
 
     if(!profileData) return <Loader/>
@@ -243,7 +255,7 @@ const Profile = () => {
                                 <span className={"font-bold text-emerald-500"}>10</span>
                                 <span>posts</span>
                             </div>
-                            <FollowersNumber/>
+                            <FollowersNumber userId={userId}/>
                         </div>
                         <div className={"mt-4"}>
                             <div className={"text-sm italic"}>{profileData.fullname} Bektur Toktbobekov Altynbekovich</div>
