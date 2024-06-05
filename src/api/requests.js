@@ -39,6 +39,7 @@ export const requests = {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
+    }),
     updateUserProfile: (data) => instance.patch("/api/users/update", data, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
