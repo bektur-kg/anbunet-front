@@ -7,6 +7,8 @@ import "./FollowersNumber.css";
 import ProfilePicture from "../../components/ProfilePicture/ProfilePicture.jsx";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { useParams } from "react-router";
+import { redirect } from "react-router";
 
 const customStyles = {
   content: {
@@ -22,6 +24,8 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function FollowersNumber({ userId }) {
+  const cId = useParams();
+  console.log(cId.id);
   const navigate = useNavigate();
   const [followings, setFollowings] = useState([]);
   const [followers, setFollowers] = useState([]);
@@ -63,7 +67,6 @@ function FollowersNumber({ userId }) {
       <>
         {mapper.map((i) => (
           <div
-            onClick={closeModal}
             key={i.login}
             className="mx-auto py-2 px-3 rounded bg-white/65 flex flex-row items-center"
           >
@@ -72,10 +75,15 @@ function FollowersNumber({ userId }) {
                 <ProfilePicture
                   url={i.profilePicture ? i.profilePicture : url}
                 />
-                <Link className="text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5" to={`/profile/${i.id}`}
-                  onClick={(e) => e.stopPropagation()}>
-                {i.login}
-                </Link>
+                <span
+                  onClick={() => {
+                    navigate(`/profile/${i.id}`);
+                    setIsOpen(false);
+                  }}
+                  className="text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5"
+                >
+                  {i.login}
+                </span>
               </>
             )}
           </div>
