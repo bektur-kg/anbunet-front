@@ -39,7 +39,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className={"px-20 py-24"}>
+    <div className={"px-20 py-24 content-center flex flex-col justify-center"}>
       <CreatePostForm
         register={register}
         errors={errors}
@@ -49,7 +49,7 @@ const CreatePost = () => {
         pre_function_input={onImageChange}
       />
       <div className={"text-red-400 mt-10 text-center"}>{responseError}</div>
-      <img className={"max-w-lg"} alt="preview image" src={image} />
+      <img className={"max-w-sm  mt-10  self-center  object-scale-down rounded-2xl"} alt="preview image" src={image} />
     </div>
   );
 };
