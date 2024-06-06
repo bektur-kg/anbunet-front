@@ -25,20 +25,20 @@ const SearchForm = (
                     <FormInput
                         inputType={"string"}
                         registerName={"login"}
-                        placeholder={"Useername"}
+                        placeholder={"Username"}
                         register={register}
                         error={errors?.login?.message}
                         regexName={"login"}
                         pre_function={pre_function_input}
                     />
                 </div>
-                <div>
+                {/* <div>
                     <Button
                         isActive={isValid}
                         text={"Search"}
                         type={"submit"}
                     />
-                </div>
+                </div> */}
             </form>
         </div>
     );

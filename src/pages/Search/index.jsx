@@ -20,6 +20,8 @@ const Search = () => {
   const [responseError, setResponseError] = useState("");
   const navigate = useNavigate();
 
+const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"
+
   const onInputChange = (event) => {
     if (event) {
       if (event.target.value && event.target.value) {
@@ -34,6 +36,8 @@ const Search = () => {
 
   const searchUser2 = () => {
     requests.getUserSearch(login2).then((res) => setSearchResults(res.data));
+    
+    console.log(url)
   };
   const debouncedonInputChange = useDebounce(login2, 500);
   //   const debouncedonInputChange2 = useDebounce(onInputChange, 300);
@@ -81,7 +85,9 @@ const Search = () => {
           >
             {i.login && (
               <>
-                <ProfilePicture />
+                <ProfilePicture url={i.profilePicture ? i.profilePicture : url} />
+
+
                 <Link
                   className={
                     "text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5"

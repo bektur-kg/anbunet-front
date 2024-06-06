@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import { requests } from "../../api/requests.js";
+import "./FollowersNumber.css"
 
 const customStyles = {
   content: {
@@ -12,6 +13,8 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    
+  
   },
 };
 
@@ -20,15 +23,35 @@ Modal.setAppElement("#root");
 function FollowersNumber({ userId }) {
   const [followings, setFollowings] = useState();
   const [followers, setFollowers] = useState();
-  const [baraba, setBaraba] = useState();
+  const [followingsNum, setFollowingsNum] = useState();
+  const [followersNum, setFollowersNum] = useState();
+
+  const [numberOf, setNumberOf] = useState();
+  const [labelOf, setLabelOf] = useState('');
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     requests
       .getUserFollowings(userId)
-      .then((res) => setFollowings(res.data.length));
+      .then((res) => {setFollowings(res.data);
+        setFollowingsNum(res.data.length)
+      });
+      
     requests
       .getUserFollowers(userId)
-      .then((res) => setFollowers(res.data.length));
+      .then((res) => {setFollowers(res.data);
+        setFollowersNum(res.data.length)
+
+      });
+
+      requests
+      .getUserProfile(userId)
+      .then((res) => {setUserName(res.data.login);
+
+      });
+      
+  
+
   }, []);
 
   let subtitle;
@@ -39,12 +62,14 @@ function FollowersNumber({ userId }) {
   }
 
   function openModal1() {
-    setBaraba(followers);
+    setNumberOf(followers.length);
+    setLabelOf(`Followers of ${userName}:`)
     setIsOpen(true); 
   }
 
   function openModal2() {
-    setBaraba(followings);
+    setNumberOf(followings.length);
+    setLabelOf(`${userName} is following:`)
     setIsOpen(true);
   }
 
@@ -61,7 +86,7 @@ function FollowersNumber({ userId }) {
     <>
       <div className={"flex items-center gap-1 cursor-pointer"}>
         <span className={"font-bold text-emerald-500"} onClick={openModal1}>
-          {followers}
+      {followersNum}
         </span>
         <Modal
           isOpen={modalIsOpen}
@@ -69,25 +94,19 @@ function FollowersNumber({ userId }) {
           onRequestClose={closeModal}
           style={customStyles}
           contentLabel="Example Modal"
+          contentClassName="custom-modal"
         >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-          <button onClick={closeModal}>close</button>
-          <div>{baraba}</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>{labelOf}</h2>
+          <div>{numberOf}</div>
+          
         </Modal>
-        <span>followers</span>
+        <span onClick={openModal1}>followers</span>
       </div>
       <div className={"flex items-center gap-1 cursor-pointer"}>
         <span className={"font-bold text-emerald-500"} onClick={openModal2}>
-          {followings}
+          {followingsNum}
         </span>
-        <span>followings</span>
+        <span onClick={openModal2} >followers</span>
       </div>
     </>
   );
