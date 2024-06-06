@@ -37,7 +37,7 @@ const Post = (
                                 muted={true}
                             /> :
                             <img
-                                src={`${mediaUrl}`.replace("https://localhost:7199/http", "http")} 
+                                src={"https://localhost:7199/".concat(`${mediaUrl}`).replace("https://localhost:7199/http", "http")} 
                                 alt="postImage"
                                 className={"w-full h-full object-scale-down rounded"}
                             />

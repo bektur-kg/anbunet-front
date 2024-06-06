@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 
 const Profile = () => {
     const userId2 = useParams()
-    const initValue = (userId2.id? userId2.id : 1);
+    const initValue = (userId2.id && userId2.id!=0 ?userId2.id : 1);
     const [userId, setUserId] = useState(initValue)
     
     const [profileData, setProfileData] = useState()

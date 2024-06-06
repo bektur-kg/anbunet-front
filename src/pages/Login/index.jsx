@@ -23,6 +23,7 @@ const Login = () => {
         requests.login(data)
             .then(res => {
                 localStorage.setItem("token", res.data.token)
+                localStorage.setItem("login", login)
                 navigate("/")
                 window.location.reload()
             })

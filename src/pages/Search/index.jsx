@@ -78,7 +78,6 @@ const Search = () => {
             className={
               "mx-auto py-2 px-3 rounded bg-white/65 flex flex-row items-center"
             }
-            key={i.login}
           >
             {i.login && (
               <>
@@ -87,7 +86,7 @@ const Search = () => {
                   className={
                     "text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5"
                   }
-                  to={"/profile"}
+                  to={`/profile/${i.userId}`}
                 >
                   {i.login}
                 </Link>
