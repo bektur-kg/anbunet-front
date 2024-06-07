@@ -24,6 +24,6 @@ export {
     CreatePost,
     EditProfile,
     CreateAiPostForm,
-    CreateAiPost.
+    CreateAiPost,
     AiImage
 }
