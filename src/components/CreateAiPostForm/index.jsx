@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, FormInput } from '../index.js';
+import {Link} from "react-router-dom";
 
 const CreateAiPostForm = ({
   handleSubmit,
@@ -17,7 +18,9 @@ const CreateAiPostForm = ({
           <h2 className="text-3xl font-medium mb-14">
             Enter prompt to generate image from A.I.
           </h2>
+          
         </div>
+        
         <div className="w-full flex flex-col">
           <FormInput
             inputType="text"
@@ -28,12 +31,13 @@ const CreateAiPostForm = ({
             regexName="promptAi"
             pre_function={onChangeFunc}
           />
-          <div>
+          <div className=" font-medium mb-5">
             <Button
               isActive={isValid}
               text="Generate"
               type="button"
               onClick={clickFunc}
+              
             />
           </div>
           <FormInput
@@ -45,10 +49,16 @@ const CreateAiPostForm = ({
             regexName="postDescription"
           />
         </div>
-        <img src="" alt="" />
-        <div>
+        <h3 className=" font-medium mb-5">
+            Wait for the image to appear befor posting...
+          </h3>
+        <div className=" font-medium">
           <Button isActive={isValid} text="Post" type="submit" />
         </div>
+        <Link
+                    className={"text-blue-400 hover:text-blue-600 hover:underline mt-4"}
+                    to={ "/createPost"}
+                >{"Upload your own image"}</Link>
       </form>
     </div>
   );

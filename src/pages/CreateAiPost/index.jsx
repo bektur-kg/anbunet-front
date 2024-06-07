@@ -4,7 +4,7 @@ import { CreateAiPostForm } from '../../components/index.js';
 import { requests } from "../../api/requests.js";
 
 const CreateAiPost = () => {
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState('./128px-placeholder.png');
   const [prompt, setPrompt] = useState('');
 
   const onPromptChange = (event) => {
