@@ -92,7 +92,7 @@ const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-ava
                   className={
                     "text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5"
                   }
-                  to={`/profile/${i.userId}`}
+                  to={`/profile/${i.id}`}
                 >
                   {i.login}
                 </Link>
