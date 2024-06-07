@@ -51,4 +51,17 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),
+    getAiGeneratedImage: (prompt) => instance.post("https://api.limewire.com/api/image/generation", {
+        headers: {
+            "Content-Type": "application/json",
+            "X-Api-Version": "v1",
+            "Accept": "application/json",
+            "Authorization": `Bearer lmwr_sk_Lgti5u4Xrz_J6MaIZMzd3iug67kNOOB4s9Y7LPfqF59wnEDm`,
+          },
+          body: JSON.stringify({
+            prompt: `${prompt}`,
+            aspect_ratio: "1:1",
+          }),
+    }),
+
 }

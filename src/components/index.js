@@ -12,6 +12,7 @@ import StoryCard from "./StoryCard";
 import EditProfileForm from "./EditProfileForm";
 import FormTextarea from './FormTextarea'
 import FormSelect from './FormSelect'
+import CreateAiPostForm from './CreateAiPostForm';
 
 export{
     Logo,
@@ -27,5 +28,6 @@ export{
     StoryCard,
     EditProfileForm,
     FormTextarea,
-    FormSelect
+    FormSelect,
+    CreateAiPostForm
 }
