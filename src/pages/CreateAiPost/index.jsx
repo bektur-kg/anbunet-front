@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { CreateAiPostForm } from '../../components/index.js';
-import { postApi, uploadPost } from '../../store/services/postApi.js';
+import { requests } from "../../api/requests.js";
 
 const CreateAiPost = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [prompt, setPrompt] = useState('');
-  const dispatch = useDispatch();
 
   const onPromptChange = (event) => {
     if (event && event.target.value) {
@@ -45,23 +43,41 @@ const CreateAiPost = () => {
     }
   };
 
+  const fetchImageFromUrl = async (url) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      return new File([blob], "image.jpg", { type: blob.type });
+    } catch (error) {
+      console.error("Error fetching the image:", error);
+      throw error;
+    }
+  };
   const createPostHandler = async (data) => {
     try {
       if (imageUrl) {
+        const file = await fetchImageFromUrl(imageUrl);
+
         const postData = new FormData();
-        postData.append('file', imageUrl);
+        postData.append('file', file);
         postData.append('description', data.description);
 
-        const response = await uploadPost(postData);
-        console.log('Post created successfully:', response);
-        reset();
-        setImageUrl('');
+        await requests.createPost(postData)
+          .then((res) => {
+            console.log(res);
+            reset();
+            setImageUrl('');
+          })
+          .catch((err) => {
+            setResponseError(err.response.data.description);
+            throw err; // re-throw error to be caught by outer try-catch
+          });
       }
     } catch (err) {
-      setResponseError('Failed to create post');
-      console.error('Failed to create post', err);
+      console.error('Failed to create post:', err);
     }
   };
+  
 
   return (
     <div className="px-20 py-24 content-center flex flex-col justify-center">

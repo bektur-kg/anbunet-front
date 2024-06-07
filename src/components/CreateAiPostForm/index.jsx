@@ -47,7 +47,7 @@ const CreateAiPostForm = ({
         </div>
         <img src="" alt="" />
         <div>
-          <Button isActive={isValid} text="Submit" type="submit" />
+          <Button isActive={isValid} text="Post" type="submit" />
         </div>
       </form>
     </div>
