@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { requests } from "../../api/requests.js";
 
 const CreatePost = () => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('./128px-placeholder.png');
   const onImageChange = (event) => {
     if (event) {
       console.log(event);
