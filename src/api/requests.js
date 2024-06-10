@@ -63,5 +63,10 @@ export const requests = {
             aspect_ratio: "1:1",
           }),
     }),
+    getMyProfile: () => instance.get(`users/profile`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
 
 }

@@ -9,7 +9,9 @@ import ProfilePicture from "../../components/ProfilePicture/ProfilePicture.jsx";
 import { useDebounce } from "@uidotdev/usehooks";
 
 const Search = () => {
+  const myId = localStorage.getItem("id");
   const [searchResults, setSearchResults] = useState([]);
+  const [followings, setFollowings] = useState([]);
   const [login2, setLogin2] = useState("");
   const {
     register,
@@ -38,6 +40,7 @@ const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-ava
     requests.getUserSearch(login2).then((res) => setSearchResults(res.data));
     
     console.log(url)
+    console.log(`this F ${followings}`)
   };
   const debouncedonInputChange = useDebounce(login2, 500);
   //   const debouncedonInputChange2 = useDebounce(onInputChange, 300);
@@ -56,8 +59,20 @@ const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-ava
   useEffect(() => {
     if (login2) {
       searchUser2();
+      
     }
   }, [debouncedonInputChange]);
+
+  useEffect(() => {
+    requests.getUserFollowings(myId).then((res) => {
+      console.log(myId)
+      console.log(res)
+      const res2 = res.data.map(item => item.id)
+      console.log(res2)
+      setFollowings(res2);
+      console.log(`this F ${followings}`)
+    });
+  }, []);
 
   // if(!searchResults) return <Loader/>
   return (
@@ -94,7 +109,9 @@ const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-ava
                   }
                   to={`/profile/${i.id}`}
                 >
-                  {i.login}
+                  {i.login} <span className={
+                    "text-gray-500 text-base "
+                  }>{followings.includes(i.id)?'subscribed':""}</span>
                 </Link>
               </>
             )}
