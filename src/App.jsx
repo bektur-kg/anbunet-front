@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router-dom"
 import {Profile, Main, NotFound, Register, Login} from "./pages"
 import { PrivateRoutes } from './helpers'
 import {privatePagesList, publicPagesList} from "./utils/pagesList.js";
+import "./style.scss"
 
 function App() {
 

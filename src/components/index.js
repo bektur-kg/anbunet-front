@@ -12,6 +12,15 @@ import StoryCard from "./StoryCard";
 import EditProfileForm from "./EditProfileForm";
 import FormTextarea from './FormTextarea'
 import FormSelect from './FormSelect'
+import Chat from './Chat'
+import Chats from './Chats'
+import InputChat from './InputChat'
+import NavbarChat from './NavbarChat'
+import SearchChat from './SearchChat'
+import MessageChat from './MessageChat'
+import SidebarChat from './SidebarChat'
+import MessagesChat from './MessagesChat'
+
 
 export{
     Logo,
@@ -27,5 +36,13 @@ export{
     StoryCard,
     EditProfileForm,
     FormTextarea,
-    FormSelect
+    FormSelect,
+    Chat,
+    Chats,
+    InputChat,
+    MessageChat,
+    NavbarChat,
+    SearchChat,
+    SidebarChat,
+    MessagesChat,
 }
