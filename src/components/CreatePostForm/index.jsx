@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, FormInput} from "../index.js";
+import {formRules} from "../../utils/formRules.js";
 
 const CreatePostForm = (
     {
@@ -8,10 +9,10 @@ const CreatePostForm = (
         isValid,
         errors,
         submitRequestHandler,
-        pre_function_input
     }) => {
+
     return (
-        <div className={"border py-10 px-5 rounded bg-white/65 rounded-2xl"}>
+        <div className={"border py-10 px-5 bg-white/65 rounded-2xl"}>
             <form
                 onSubmit={handleSubmit(submitRequestHandler)}
                 className={"flex flex-col justify-between items-center"}
@@ -23,10 +24,10 @@ const CreatePostForm = (
                     <FormInput
                         inputType={"file"}
                         regexName={"postFile"}
+                        placeholder={"Choose Your file"}
                         registerName={"file"}
                         register={register}
                         error={errors?.file?.message}
-                        pre_function={pre_function_input}
                     />
                     <FormInput
                         inputType={"text"}
@@ -37,7 +38,6 @@ const CreatePostForm = (
                         regexName={"postDescription"}
                     />
                 </div>
-                <img src="" alt="" />
                 <div>
                     <Button
                         isActive={isValid}

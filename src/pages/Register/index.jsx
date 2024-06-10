@@ -9,7 +9,7 @@ const Register = () => {
     const {
         register,
         handleSubmit,
-        formState: {isValid, errors},
+        formState: {isValidProfileForm, errors},
         reset,
     } = useForm({ mode: 'onChange' })
     const [responseError, setResponseError] = useState("");
@@ -43,7 +43,7 @@ const Register = () => {
                 handleSubmit={handleSubmit}
                 register={register}
                 errors={errors}
-                isValid={isValid}
+                isValid={isValidProfileForm}
                 reset={reset}
                 submitRequestHandler={submitRequestHandler}
             />

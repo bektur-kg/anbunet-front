@@ -11,7 +11,8 @@ export default {
         'story': '34rem',
       },
       width:{
-        'story': '30rem'
+        'story': '30rem',
+        'card': '34rem',
       }
     },
   },

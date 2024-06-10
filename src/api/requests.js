@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const instance = axios.create({baseURL: "https://localhost:7199/api/"})
+const instance = axios.create({baseURL: "https://localhost:7199/api"})
 
 export const requests = {
     register: (data) => instance.post("users/register", data),
@@ -19,7 +19,21 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),
-
+    getCurrentUserProfile: () => instance.get(`users/profile`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
+    addLikeToPost: (postId) => instance.post(`posts/${postId}/likes`, null,{
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
+    removeLikeFromPost: (postId) => instance.delete(`posts/${postId}/likes`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
     getUserSearch: (login) => instance.get(`users?login=${login}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -40,14 +54,34 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
     }),
-    updateUserProfile: (data) => instance.patch("/api/users/update", data, {
+    getPostComments: (postId) => instance.get(`posts/${postId}/comments`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+    }),
+    getFollowingStories: () => instance.get(`following/stories`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+    }),
+    updateUserProfile: (data) => instance.patch("users/update", data, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),
-    updateUserProfilePicture: (data) => instance.put("/api/users/update_profile_picture", data, {
+    updateUserPassword: (data) => instance.put("users/update_password", data, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
+    updateUserProfilePicture: (data) => instance.put("users/update_profile_picture", data, {
         headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
+    sendComment: (data) => instance.post("posts/comment", data, {
+        headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),

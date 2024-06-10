@@ -1,6 +1,6 @@
 import React from 'react';
-import {getUrlFileExtension} from "../../helpers/index.js";
-import {videoPostUrlExtensions} from "../../utils/postUrlExtensions.js";
+import {getUrlFileExtension} from "../../helpers/index.js"
+import {videoPostUrlExtensions} from "../../utils/postUrlExtensions.js"
 
 const Actual = (
     {
@@ -26,7 +26,7 @@ const Actual = (
                     />
             }
         </div>
-    );
-};
+    )
+}
 
-export default Actual;
+export default Actual

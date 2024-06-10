@@ -40,12 +40,15 @@ const EditProfileForm = (
             <div className={"flex flex-col"}>
                 <div className={"flex justify-center my-4"}>
                     <div className={"w-80 flex flex-col items-center"}>
-                        <input
-                            className={"border w-full py-2 px-3 rounded"}
-                            type={"file"}
-                            accept={"image/*"}
-                            onChange={handleFileChange}
-                        />
+                        <div className={"flex flex-col items-center gap-2"}>
+                            <span className={"text-lg font-medium"}>Profile Picture</span>
+                            <input
+                                className={"border w-full py-2 px-3 rounded"}
+                                type={"file"}
+                                accept={"image/*"}
+                                onChange={handleFileChange}
+                            />
+                        </div>
                         {
                             previewProfileImage &&
                             <div className={"w-40 h-40 mt-2"}>
@@ -62,7 +65,7 @@ const EditProfileForm = (
                     <FormInput
                         inputType={"text"}
                         registerName={"fullName"}
-                        placeholder={"New full name"}
+                        placeholder={"Full Name"}
                         register={register}
                         error={errors?.fullName?.message}
                         regexName={"fullName"}
@@ -70,7 +73,7 @@ const EditProfileForm = (
                     <FormInput
                         inputType={"email"}
                         registerName={"email"}
-                        placeholder={"New Email"}
+                        placeholder={"Email"}
                         register={register}
                         error={errors?.email?.message}
                         regexName={"email"}
@@ -78,7 +81,7 @@ const EditProfileForm = (
                 </div>
                 <FormTextarea
                     registerName={"bio"}
-                    placeholder={"Your biography"}
+                    placeholder={"Biography"}
                     register={register}
                     error={errors?.bio?.message}
                     regexName={"bio"}
@@ -96,7 +99,7 @@ const EditProfileForm = (
                     />
                     <Button
                         text={"Cancel"}
-                        classNames={"text-emerald-400 bg-transparent border border-emerald-400 hover:text-white hover:bg-emerald-400 transition-all"}
+                        classNames={"text-emerald-600 bg-transparent border border-emerald-400 hover:text-white hover:bg-emerald-400 transition-all"}
                         onClick={() => {
                             reset()
                             navigate(-1)
