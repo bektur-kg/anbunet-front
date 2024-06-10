@@ -84,6 +84,7 @@ function FollowersNumber({ userId }) {
         <span className={"font-bold text-emerald-500"} onClick={openModal2}>
           {followingsNum}
         </span>
+
         <span onClick={openModal2}>followings</span>
       </div>
       {showModal ? (
