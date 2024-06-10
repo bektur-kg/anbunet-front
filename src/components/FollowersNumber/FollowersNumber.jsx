@@ -6,9 +6,12 @@ import { useParams } from "react-router";
 
 function FollowersNumber({ userId }) {
   const cId = useParams();
+
+  const myId = localStorage.getItem("id");
   const navigate = useNavigate();
   const [followings, setFollowings] = useState([]);
   const [followers, setFollowers] = useState([]);
+  const [myFollowings, setMyFollowings] = useState([]);
   const [mapper, setMapper] = useState([]);
   const [followingsNum, setFollowingsNum] = useState();
   const [followersNum, setFollowersNum] = useState();
@@ -16,6 +19,7 @@ function FollowersNumber({ userId }) {
   const [labelOf, setLabelOf] = useState("");
   const [userName, setUserName] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [followCounter, setFollowCounter] = useState(0);
 
   useEffect(() => {
     requests.getUserFollowings(userId).then((res) => {
@@ -31,6 +35,11 @@ function FollowersNumber({ userId }) {
     requests.getUserProfile(userId).then((res) => {
       setUserName(res.data.login);
     });
+
+    requests.getUserFollowings(myId).then((res) => {
+      const res2 = res.data.map(item => item.id)
+      setMyFollowings(res2);
+    });
   }, [userId]);
 
   const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png";
@@ -43,13 +52,20 @@ function FollowersNumber({ userId }) {
             <>
               <ProfilePicture url={i.profilePicture ? i.profilePicture : url} />
               <span
-                onClick={() => {
-                  navigate(`/profile/${i.id}`);
-                  setShowModal(false);
-                }}
+               
                 className="text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5"
               >
-                {i.login}
+                <span
+                 onClick={() => {
+                  navigate(`/profile/${i.id}`);
+                  setShowModal(false);
+                }}>{i.login}</span><span className={
+                    "text-blue-800 text-base ml-2 "
+                  }>{myFollowings.includes(i.id)?<span onClick={() => {
+                    unFollowUser(i.id);}} className={
+                    "text-blue-300 text-base"
+                  }>subscribed</span>:<span onClick={() => {
+                    followUser(i.id);}} className={"bg-blue-400 text-white-800 rounded p-1"}>subscribe</span>}</span>
               </span>
             </>
           )}
@@ -64,6 +80,16 @@ function FollowersNumber({ userId }) {
     setLabelOf(`Followers of ${userName}:`);
     setShowModal(true);
   }
+
+  function followUser(id) {
+    requests.followUser(id)
+    setFollowCounter(followCounter+1)
+  }
+  function unFollowUser(id) {
+    requests.unfollowUser(id)
+    setFollowCounter(followCounter+1)
+  }
+
 
   function openModal2() {
     setNumberOf(followings.length);
