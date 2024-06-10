@@ -51,7 +51,7 @@ const Profile = () => {
                 <span className={"font-bold text-emerald-500"}>10</span>
                 <span>posts</span>
               </div>
-              <FollowersNumber userId={id} />
+              <FollowersNumber userId={initValue  } />
             </div>
             <div className={"mt-4"}>
               <div className={"text-sm italic"}>
