@@ -6,6 +6,7 @@ import {CiHeart} from "react-icons/ci"
 import {videoPostUrlExtensions} from "../../utils/postUrlExtensions.js"
 import {TiHeartFullOutline} from "react-icons/ti"
 import {requests} from "../../api/requests.js"
+import {useNavigate} from "react-router-dom"
 
 const Post = (
     {
@@ -20,6 +21,7 @@ const Post = (
     const isMediaVideo = videoPostUrlExtensions.includes(getUrlFileExtension(mediaUrl))
     const [doesCurrentUserLiked, setDoesCurrentUserLiked] = useState(false)
     const [isPostModalOpen, setIsPostModalOpen] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         setDoesCurrentUserLiked(likes.some(like => like.user.id === currentUserId))
@@ -49,15 +51,17 @@ const Post = (
                             <video
                                 src={mediaUrl}
                                 controls={true}
-                                className={"w-full h-full object-cover rounded-2xl"}
+                                className={"w-full h-full object-cover rounded-2xl cursor-pointer"}
                                 autoPlay={true}
                                 loop={true}
+                                onClick={() => setIsPostModalOpen(true)}
                                 muted={true}
                             /> :
                             <img
+                                onClick={() => setIsPostModalOpen(true)}
                                 src={mediaUrl}
                                 alt="postImage"
-                                className={"w-full h-full object-cover rounded"}
+                                className={"w-full h-full object-cover rounded cursor-pointer"}
                             />
                     }
                 </div>

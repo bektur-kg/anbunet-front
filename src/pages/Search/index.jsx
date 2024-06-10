@@ -38,9 +38,6 @@ const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-ava
 
   const searchUser2 = () => {
     requests.getUserSearch(login2).then((res) => setSearchResults(res.data));
-    
-    console.log(url)
-    console.log(`this F ${followings}`)
   };
   const debouncedonInputChange = useDebounce(login2, 500);
   //   const debouncedonInputChange2 = useDebounce(onInputChange, 300);
@@ -54,23 +51,17 @@ const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-ava
     requests.getUserSearch(login).then((res) => setSearchResults(res.data));
   };
 
-  console.log(searchResults);
 
   useEffect(() => {
     if (login2) {
       searchUser2();
-      
     }
   }, [debouncedonInputChange]);
 
   useEffect(() => {
     requests.getUserFollowings(myId).then((res) => {
-      console.log(myId)
-      console.log(res)
       const res2 = res.data.map(item => item.id)
-      console.log(res2)
       setFollowings(res2);
-      console.log(`this F ${followings}`)
     });
   }, []);
 

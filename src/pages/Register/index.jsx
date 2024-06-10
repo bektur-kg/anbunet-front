@@ -27,6 +27,10 @@ const Register = () => {
                 requests.login(data)
                     .then(res => {
                         localStorage.setItem("token", res.data.token)
+
+                        requests.getMyProfile()
+                            .then(res => localStorage.setItem("id", res.data.id))
+
                         navigate("/")
                         window.location.reload()
                     })

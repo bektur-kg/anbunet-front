@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Button, Empty, Loader, Post, Actual, ProfilePost} from "../../components"
+import {Button, Empty, Loader, Post, Actual, ProfilePost, FollowersNumber} from "../../components"
 import {requests} from "../../api/requests.js"
 import {acutals} from "../../utils/tempData.js"
 import {useNavigate, useParams} from "react-router-dom"
@@ -14,6 +14,7 @@ const Profile = () => {
     useEffect(() => {
         requests.getCurrentUserProfile()
             .then(res => setCurrentUserId(res.data.id))
+
         requests.getUserProfile(id).then(res => setProfileData(res.data))
     }, [id])
 
@@ -43,7 +44,7 @@ const Profile = () => {
                                 <span className={"font-bold text-emerald-500"}>10</span>
                                 <span>posts</span>
                             </div>
-                            <FollowersNumber userId={initValue} />
+                            <FollowersNumber userId={id} />
                         </div>
                         <div className={"mt-4"}>
                             <div className={"text-sm italic"}>{profileData.fullname}</div>
@@ -71,7 +72,7 @@ const Profile = () => {
                 </div>
             </div>
             <hr className={"border-emerald-300 my-5"}/>
-            <div className={"w-full mx-auto flex flex-wrap"}>
+            <div className={"w-full mx-auto flex flex-wrap justify-center"}>
                 {
                     profileData.posts.length === 0 ?
                         <div className={"mt-10"}>
@@ -98,7 +99,6 @@ const Profile = () => {
                         })
                 }
             </div>
-
         </div>
   )
 }

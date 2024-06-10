@@ -12,9 +12,6 @@ const Main = () => {
 
 
     useEffect(() => {
-        requests.getMyProfile()
-            .then(res => localStorage.setItem("id", res.data.id))
-
         requests.getUserFollowedPosts()
             .then(res => setPosts(res.data))
 
