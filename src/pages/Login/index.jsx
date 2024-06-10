@@ -20,8 +20,6 @@ const Login = () => {
             password
         }
 
-        
-
         requests.login(data)
             .then(res => {
                 localStorage.setItem("token", res.data.token)
@@ -33,15 +31,7 @@ const Login = () => {
                 console.log(res)
                 setResponseError(res.response?.data.description)
             }).finally(reset)
-    
-            
-            
-    
-    
-        };
-
-    
-
+        }
 
     return (
         <div className={"px-20 py-24"}>

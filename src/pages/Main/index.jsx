@@ -8,23 +8,18 @@ const Main = () => {
     const [isStoryModalActive, setIsStoryModalActive] = useState(false)
     const storyRefs = useRef({})
     const [posts, setPosts] = useState()
-    const [page, setPage] = useState(2)
-    const userId = 1
+    const [page, setPage] = useState(1)
 
-    requests.getMyProfile()
-    .then(res => {
-        localStorage.setItem("id", res.data.id)
-       
-        console.log(localStorage.getItem("id"))
-     
-    })
 
     useEffect(() => {
-        requests.getUserFollowedPosts(userId)
+        requests.getMyProfile()
+            .then(res => localStorage.setItem("id", res.data.id))
+
+        requests.getUserFollowedPosts()
             .then(res => setPosts(res.data))
 
-            requests.getFollowingStories()
-                .then(res => console.log(res))
+        requests.getFollowingStories()
+            .then(res => console.log(res))
     }, [])
 
     const scrollToStory = (storyId) => {
@@ -81,8 +76,7 @@ const Main = () => {
                 }
             </div>
         </div>
+    )
+}
 
-    );
-};
-
-export default Main;
+export default Main
