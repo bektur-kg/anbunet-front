@@ -8,6 +8,9 @@ import Search from './Search'
 import Messanger from './Messanger'
 import CreatePost from "./CreatePost"
 import EditProfile from './EditProfile'
+import CreateAiPostForm from '../components/CreateAiPostForm'
+import CreateAiPost from './CreateAiPost'
+import AiImage from '../components/AiImage/AiImage'
 
 export {
     Profile,
@@ -19,5 +22,8 @@ export {
     Search,
     Messanger,
     CreatePost,
-    EditProfile
+    EditProfile,
+    CreateAiPostForm,
+    CreateAiPost,
+    AiImage
 }

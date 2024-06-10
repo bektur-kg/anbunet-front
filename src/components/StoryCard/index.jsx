@@ -20,7 +20,7 @@ const StoryCard = (
 
     return (
         <div
-            className={"h-full flex flex-col justify-center"}
+            className={"h-full flex flex-col justify-center snap-center snap-always"}
             ref={(el) => setStoryRef(id, el)}
         >
             <div className={"pb-2"}>

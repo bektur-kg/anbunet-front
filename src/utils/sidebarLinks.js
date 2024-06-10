@@ -42,7 +42,7 @@ export const sidebarLinks = [
     },
     {
         id: 5,
-        path: isLoggedIn ? "/profile" : "/login",
+        path: isLoggedIn ? `/profile/${localStorage.getItem("id")}` : "/login",
         Icon: isLoggedIn ? MdPerson : BiSolidLogInCircle,
         text: isLoggedIn ? "Profile" : "Login"
     },

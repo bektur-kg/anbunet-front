@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 const PostUser = (
     {
@@ -7,14 +8,16 @@ const PostUser = (
         profilePicture,
         onClick
     }) => {
+    const navigate = useNavigate()
+
     return (
         <div
             className={"flex items-center gap-3 cursor-pointer"}
-            onClick={onClick}
+            onClick={() => navigate(`/profile/${id}`)}
         >
             <div>
                 <img
-                    className={"w-10 h-10 rounded-full"}
+                    className={"w-10 h-10 rounded-full object-cover border border-emerald-400"}
                     src={profilePicture ? profilePicture : "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"}
                     alt="profile"
                 />

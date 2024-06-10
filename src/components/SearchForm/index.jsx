@@ -2,17 +2,16 @@ import React from 'react';
 import {Button, FormInput} from "../index.js";
 import {Link} from "react-router-dom";
 
-const LoginForm = (
+const SearchForm = (
     {
         formTitle,
         handleSubmit,
         register,
         isValid,
         errors,
-        submitRequestHandler
+        submitRequestHandler,
+        pre_function_input
     }) => {
-
-
     return (
         <div className={"border py-10 px-5 rounded bg-white/65"}>
             <form
@@ -26,34 +25,23 @@ const LoginForm = (
                     <FormInput
                         inputType={"string"}
                         registerName={"login"}
-                        placeholder={"Your login"}
+                        placeholder={"Username"}
                         register={register}
                         error={errors?.login?.message}
                         regexName={"login"}
-                    />
-                    <FormInput
-                        inputType={"password"}
-                        registerName={"password"}
-                        placeholder={"Your Pas$w0rd"}
-                        register={register}
-                        error={errors?.password?.message}
-                        regexName={"password"}
+                        pre_function={pre_function_input}
                     />
                 </div>
-                <div>
+                {/* <div>
                     <Button
                         isActive={isValid}
-                        text={"Submit"}
+                        text={"Search"}
                         type={"submit"}
                     />
-                </div>
-                <Link
-                    className={"text-blue-400 hover:text-blue-600 hover:underline mt-4"}
-                    to={formTitle === "Login" ? "/register" : "/login"}
-                >{formTitle === "Login" ? "Go to register new account." : "Log into an account"}</Link>
+                </div> */}
             </form>
         </div>
     );
 };
 
-export default LoginForm;
+export default SearchForm;

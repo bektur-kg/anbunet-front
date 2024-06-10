@@ -1,6 +1,6 @@
 import React from 'react';
 import {formRules} from "../../utils/formRules.js";
-
+   
 const FormInput = (
     {
         inputType,
@@ -8,7 +8,7 @@ const FormInput = (
         register,
         registerName,
         regexName,
-        error
+        error,
     }) => {
     return (
         <label className={"w-full mb-4 rounded"}>
