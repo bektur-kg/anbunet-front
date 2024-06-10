@@ -1,9 +1,12 @@
 import React from 'react';
 import 'ldrs/trefoil'
 
-const Loader = () => {
+const Loader = (
+    {
+        className
+    }) => {
     return (
-        <div className={"w-full h-screen flex justify-center items-center"}>
+        <div className={`w-full h-screen flex justify-center items-center ${className}`}>
             <l-trefoil
                 size="40"
                 stroke="4"

@@ -1,44 +1,97 @@
 import React, {useState} from 'react';
-import {EditProfileForm} from "../../components"
+import {ChangePasswordForm, EditProfileForm} from "../../components"
 import {useForm} from "react-hook-form";
 import {requests} from "../../api/requests.js";
 import login from "../Login/index.jsx";
+import {useNavigate} from "react-router-dom";
+import {hasNonNullProperty} from "../../helpers/hasNonNullProperty.js";
 
 const EditProfile = () => {
     const {
-        register,
-        handleSubmit,
-        formState: {isValid, errors},
-        reset,
+        register: registerProfile,
+        handleSubmit: handleSubmitProfile,
+        formState: {isValid: isValidProfileForm, errors: profileFormErrors},
+        reset: resetProfileForm,
     } = useForm({mode: 'onChange'})
-    const [profilePicture, setProfilePicture] = useState(null)
 
-    const submitRequestHandler = (formData) => {
+    const {
+        register: registerPassword,
+        handleSubmit: handleSubmitPassword,
+        formState: {isValid: isValidPassword, errors: passwordErrors},
+        reset: resetPasswordForm,
+    } = useForm({mode: 'onChange'})
+
+    const [profilePicture, setProfilePicture] = useState(null)
+    const [responseErrors, setResponseErrors] = useState([])
+    const navigate = useNavigate()
+
+    const submitProfileFormRequestHandler = (formData) => {
+        setResponseErrors([])
         const requestData = {
             email: formData.email ? formData.email : null,
             bio: formData.bio ? formData.bio : null,
             fullname: formData.fullName ? formData.fullName : null,
-            gender: formData.gender ? formData.gender : null,
+            gender: formData.gender && formData.gender !== "Gender" ? formData.gender : null,
         }
 
-        requests.updateUserProfilePicture({file: profilePicture})
-            .then()
+        if(hasNonNullProperty(requestData)){
+            console.log(requestData)
+            requests.updateUserProfile(requestData)
+                .catch(res => setResponseErrors([...responseErrors, res.response.data.description]))
+        }
 
-        requests.updateUserProfile(requestData)
-            .then()
+        if(profilePicture){
+            requests.updateUserProfilePicture({file: profilePicture})
+                .catch(res => setResponseErrors(  [...responseErrors, res.response.data.description]))
+        }
+
+        resetProfileForm()
+    }
+
+    const changePasswordFormHandler = (formData) => {
+        if(formData.oldPassword !== "" && formData.newPassword !== ""){
+            const passwordData = {
+                oldPassword: formData.oldPassword,
+                newPassword: formData.newPassword
+            }
+            requests.updateUserPassword(passwordData)
+                .catch(res => setResponseErrors(  [...responseErrors, res.response.data.description]))
+        }
+
+        resetPasswordForm()
     }
 
     return (
         <div className={"pt-20 px-12"}>
             <EditProfileForm
-                handleSubmit={handleSubmit}
-                register={register}
-                errors={errors}
-                isValid={isValid}
+                handleSubmit={handleSubmitProfile}
+                register={registerProfile}
+                errors={profileFormErrors}
+                isValid={isValidProfileForm}
                 setProfilePicture={setProfilePicture}
                 profilePicture={profilePicture}
-                reset={reset}
-                submitRequestHandler={submitRequestHandler}
+                reset={resetProfileForm}
+                submitRequestHandler={submitProfileFormRequestHandler}
+            />
+            <ul className={"my-4 flex flex-col items-center"}>
+                {
+                    responseErrors.map(i => (
+                        <span
+                            key={i}
+                            className={"text-red-400 text-lg"}
+                        >
+                            {i}
+                        </span>
+                    ))
+                }
+            </ul>
+            <ChangePasswordForm
+                handleSubmit={handleSubmitPassword}
+                register={registerPassword}
+                errors={passwordErrors}
+                isValid={isValidPassword}
+                reset={resetPasswordForm}
+                submitRequestHandler={changePasswordFormHandler}
             />
         </div>
     );

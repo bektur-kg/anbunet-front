@@ -1,30 +1,29 @@
-import React, {useRef, useState, useEffect} from 'react';
-import {stories} from "../../utils/tempData.js";
-import Story from "../../components/Story/index.jsx";
-import {requests} from "../../api/requests.js";
-import {Loader, Post, StoryModal} from "../../components";
-
+import React, {useRef, useState, useEffect} from 'react'
+import {stories} from "../../utils/tempData.js"
+import Story from "../../components/Story/index.jsx"
+import {requests} from "../../api/requests.js"
+import {Loader, Post, StoryModal} from "../../components"
 
 const Main = () => {
     const [isStoryModalActive, setIsStoryModalActive] = useState(false)
-    const [selectedStory, setSelectedStory] = useState(null)
     const storyRefs = useRef({})
-    
     const [posts, setPosts] = useState()
     const [page, setPage] = useState(1)
+
     const userId = 1
 
-    requests.getMyProfile()
-    .then(res => {
-        localStorage.setItem("id", res.data.id)
-       
-        console.log(localStorage.getItem("id"))
-     
-    })
+
+
 
     useEffect(() => {
-        requests.getUserFollowedPosts(userId)
+        requests.getMyProfile()
+            .then(res => localStorage.setItem("id", res.data.id))
+
+        requests.getUserFollowedPosts()
             .then(res => setPosts(res.data))
+
+        requests.getFollowingStories()
+            .then(res => console.log(res))
     }, [])
 
     const scrollToStory = (storyId) => {
@@ -33,12 +32,11 @@ const Main = () => {
                 behavior: "smooth",
                 block: "center",
                 inline: "nearest"
-            });
-        }, 0);
+            })
+        }, 0)
     }
 
     const handleStoryClick = (story) => {
-        setSelectedStory(story)
         setIsStoryModalActive(true)
         scrollToStory(story.id)
     }
@@ -66,24 +64,23 @@ const Main = () => {
             </div>
             <hr className={"border-emerald-300 my-10"}/>
             <div className={"px-20 py-24 w-1/2 mx-auto"}>
-            {
-                posts?.map(p => (
-                    <Post
-                        key={p.id}
-                        id={p.id}
-                        mediaUrl={p.mediaUrl}
-                        description={p.description}
-                        comments={p.comments}
-                        createdDate={p.createdDate}
-                        likes={p.likes}
-                        user={p.user}
-                    />
-                ))
-            }
+                {
+                    posts?.map(p => (
+                        <Post
+                            key={p.id}
+                            id={p.id}
+                            mediaUrl={p.mediaUrl}
+                            description={p.description}
+                            comments={p.comments}
+                            createdDate={p.createdDate}
+                            likes={p.likes}
+                            user={p.user}
+                        />
+                    ))
+                }
             </div>
-            </div>
-        
-    );
-};
+        </div>
+    )
+}
 
-export default Main;
+export default Main

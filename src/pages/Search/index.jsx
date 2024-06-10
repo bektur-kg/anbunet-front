@@ -16,7 +16,7 @@ const Search = () => {
   const {
     register,
     handleSubmit,
-    formState: { isValid, errors },
+    formState: { isValidProfileForm, errors },
     reset,
   } = useForm({ mode: "onChange" });
   const [responseError, setResponseError] = useState("");
@@ -82,7 +82,7 @@ const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-ava
         handleSubmit={handleSubmit}
         register={register}
         errors={errors}
-        isValid={isValid}
+        isValid={isValidProfileForm}
         reset={reset}
         submitRequestHandler={searchUser}
         pre_function_input={onInputChange}
