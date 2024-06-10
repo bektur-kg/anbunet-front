@@ -26,7 +26,6 @@ const Login = () => {
             .then(res => {
                 localStorage.setItem("token", res.data.token)
                 localStorage.setItem("login", login)
-                getmyID()
                 navigate("/")
                 window.location.reload()
             })
