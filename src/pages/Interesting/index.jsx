@@ -57,7 +57,7 @@ const Interesting = () => {
                     ))
                 }
         </InfiniteScroll>
-    );
-};
+    )
+}
 
-export default Interesting;
+export default Interesting

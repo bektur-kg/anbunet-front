@@ -9,7 +9,9 @@ import ProfilePicture from "../../components/ProfilePicture/ProfilePicture.jsx";
 import { useDebounce } from "@uidotdev/usehooks";
 
 const Search = () => {
+  const myId = localStorage.getItem("id");
   const [searchResults, setSearchResults] = useState([]);
+  const [followings, setFollowings] = useState([]);
   const [login2, setLogin2] = useState("");
   const {
     register,
@@ -19,6 +21,8 @@ const Search = () => {
   } = useForm({ mode: "onChange" });
   const [responseError, setResponseError] = useState("");
   const navigate = useNavigate();
+
+const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"
 
   const onInputChange = (event) => {
     if (event) {
@@ -34,6 +38,9 @@ const Search = () => {
 
   const searchUser2 = () => {
     requests.getUserSearch(login2).then((res) => setSearchResults(res.data));
+    
+    console.log(url)
+    console.log(`this F ${followings}`)
   };
   const debouncedonInputChange = useDebounce(login2, 500);
   //   const debouncedonInputChange2 = useDebounce(onInputChange, 300);
@@ -52,8 +59,20 @@ const Search = () => {
   useEffect(() => {
     if (login2) {
       searchUser2();
+      
     }
   }, [debouncedonInputChange]);
+
+  useEffect(() => {
+    requests.getUserFollowings(myId).then((res) => {
+      console.log(myId)
+      console.log(res)
+      const res2 = res.data.map(item => item.id)
+      console.log(res2)
+      setFollowings(res2);
+      console.log(`this F ${followings}`)
+    });
+  }, []);
 
   // if(!searchResults) return <Loader/>
   return (
@@ -78,18 +97,21 @@ const Search = () => {
             className={
               "mx-auto py-2 px-3 rounded bg-white/65 flex flex-row items-center"
             }
-            key={i.login}
           >
             {i.login && (
               <>
-                <ProfilePicture />
+                <ProfilePicture url={i.profilePicture ? i.profilePicture : url} />
+
+
                 <Link
                   className={
                     "text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5"
                   }
-                  to={"/profile"}
+                  to={`/profile/${i.id}`}
                 >
-                  {i.login}
+                  {i.login} <span className={
+                    "text-gray-500 text-base "
+                  }>{followings.includes(i.id)?'subscribed':""}</span>
                 </Link>
               </>
             )}

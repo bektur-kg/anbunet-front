@@ -2,20 +2,20 @@ import React, {useEffect, useState} from 'react'
 import {Button, Empty, Loader, Post, Actual, ProfilePost} from "../../components"
 import {requests} from "../../api/requests.js"
 import {acutals} from "../../utils/tempData.js"
-import {useNavigate} from "react-router-dom"
+import {useNavigate, useParams} from "react-router-dom"
 
 const Profile = () => {
     const [profileData, setProfileData] = useState(null)
     const [currentUserId, setCurrentUserId] = useState(0)
     const navigate = useNavigate()
+    const { id } = useParams()
 
-    console.log(profileData)
 
     useEffect(() => {
         requests.getCurrentUserProfile()
             .then(res => setCurrentUserId(res.data.id))
-        requests.getUserProfile(1).then(res => setProfileData(res.data))
-    }, [])
+        requests.getUserProfile(id).then(res => setProfileData(res.data))
+    }, [id])
 
 
     if (!profileData) return <Loader/>
@@ -43,6 +43,7 @@ const Profile = () => {
                                 <span className={"font-bold text-emerald-500"}>10</span>
                                 <span>posts</span>
                             </div>
+                            <FollowersNumber userId={initValue} />
                         </div>
                         <div className={"mt-4"}>
                             <div className={"text-sm italic"}>{profileData.fullname}</div>
@@ -97,8 +98,9 @@ const Profile = () => {
                         })
                 }
             </div>
-        </div>
-    );
-};
 
-export default Profile;
+        </div>
+  )
+}
+
+export default Profile

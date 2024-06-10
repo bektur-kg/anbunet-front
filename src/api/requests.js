@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 const instance = axios.create({baseURL: "https://localhost:7199/api"})
 
@@ -85,4 +85,31 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),
+    getAiGeneratedImage: (prompt) => instance.post("https://api.limewire.com/api/image/generation", {
+        headers: {
+            "Content-Type": "application/json",
+            "X-Api-Version": "v1",
+            "Accept": "application/json",
+            "Authorization": `Bearer lmwr_sk_Lgti5u4Xrz_J6MaIZMzd3iug67kNOOB4s9Y7LPfqF59wnEDm`,
+          },
+          body: JSON.stringify({
+            prompt: `${prompt}`,
+            aspect_ratio: "1:1",
+          }),
+    }),
+    getMyProfile: () => instance.get(`users/profile`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
+    followUser: (userId) => instance.post(`https://localhost:7199/follow/${userId}`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
+    unfollowUser: (userId) => instance.delete(`https://localhost:7199/following/${userId}`,  {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    })
 }

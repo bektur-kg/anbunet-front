@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import {Button, FormInput} from "../index.js";
-import {formRules} from "../../utils/formRules.js";
+import React, {useState} from 'react'
+import {Button, FormInput} from "../index.js"
+import {formRules} from "../../utils/formRules.js"
+import {Link} from "react-router-dom"
 
 const CreatePostForm = (
     {
@@ -45,6 +46,10 @@ const CreatePostForm = (
                         type={"submit"}
                     />
                 </div>
+                <Link
+                    className={"text-blue-400 hover:text-blue-600 hover:underline mt-4"}
+                    to={"/createai"}
+                >{"Generate image with Artificial Intelligence to post!"}</Link>
             </form>
         </div>
     );

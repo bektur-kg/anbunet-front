@@ -11,6 +11,14 @@ const Main = () => {
     const [page, setPage] = useState(2)
     const userId = 1
 
+    requests.getMyProfile()
+    .then(res => {
+        localStorage.setItem("id", res.data.id)
+       
+        console.log(localStorage.getItem("id"))
+     
+    })
+
     useEffect(() => {
         requests.getUserFollowedPosts(userId)
             .then(res => setPosts(res.data))

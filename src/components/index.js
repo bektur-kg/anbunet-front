@@ -17,6 +17,7 @@ import ChangePasswordForm from './ChangePasswordForm'
 import PostModalWindow from './PostModalWindow'
 import PostComment from "./PostComment"
 import ProfilePost from './ProfilePost'
+import CreateAiPostForm from './CreateAiPostForm'
 
 export{
     Logo,
@@ -38,4 +39,5 @@ export{
     PostModalWindow,
     PostComment,
     ProfilePost
+    CreateAiPostForm
 }

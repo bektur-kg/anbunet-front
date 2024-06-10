@@ -93,7 +93,7 @@ const Post = (
                 setIsActive={setIsPostModalOpen}
             />
         </div>
-    );
-};
+    )
+}
 
-export default Post;
+export default Post

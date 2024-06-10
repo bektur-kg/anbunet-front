@@ -13,7 +13,7 @@ const Actual = (
             {
                 isMediaVideo ?
                     <video
-                        src={mediaUrl}
+                        src={'https://www.youtube.com/watch?v=7sASWdtV2GQ'}
                         controls={false}
                         className={"w-full h-full object-cover rounded-full "}
                         autoPlay={false}

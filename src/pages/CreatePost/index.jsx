@@ -9,21 +9,21 @@ const CreatePost = () => {
         handleSubmit,
         formState: {isValid, errors},
         reset,
-    } = useForm({mode: "onChange"});
+    } = useForm({mode: "onChange"})
     const [responseError, setResponseError] = useState("")
     const [isPostCreated, setIsPostCreated] = useState(false)
 
     const createPostHandler = ({file, description}) => {
-        const formData = new FormData();
-        formData.append("file", file[0]);
-        formData.append("description", description);
+        const formData = new FormData()
+        formData.append("file", file[0])
+        formData.append("description", description)
 
         requests
             .createPost(formData)
             .then((res) => setIsPostCreated(true))
             .catch((res) => setResponseError(res.response.data.description))
             .finally(reset)
-    };
+    }
 
     return (
         <div className={"px-20 py-24"}>
@@ -39,7 +39,7 @@ const CreatePost = () => {
                 isPostCreated && <div className={"text-emerald-400 text-xl mt-10 text-center"}>Post Created Successfully! </div>
             }
         </div>
-    );
-};
+    )
+}
 
 export default CreatePost;
