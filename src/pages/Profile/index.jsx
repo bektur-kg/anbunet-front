@@ -9,14 +9,14 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { id } = useParams();
-  console.log(id);
+  console.log(`id: ${id}`);
   const userId2 = useParams();
+  console.log(`userId2: ${userId2}`);
   const initValue = userId2.id && userId2.id != 0 ? userId2.id : 1;
   const [userId, setUserId] = useState(initValue);
   console.log(userId);
   const [profileData, setProfileData] = useState();
   const navigate = useNavigate();
-
 
   useEffect(() => {
     requests.getUserProfile(id || 1).then((res) => setProfileData(res.data));

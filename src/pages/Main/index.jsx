@@ -11,7 +11,7 @@ const Main = () => {
     const storyRefs = useRef({})
     
     const [posts, setPosts] = useState()
-    const [page, setPage] = useState(2)
+    const [page, setPage] = useState(1)
     const userId = 1
 
     requests.getMyProfile()
