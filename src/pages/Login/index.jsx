@@ -26,9 +26,13 @@ const Login = () => {
                 localStorage.setItem("login", login)
 
                 requests.getMyProfile()
-                    .then(res => localStorage.setItem("id", res.data.id))
-                navigate("/")
-                window.location.reload()
+                    .then(res => {
+                        console.log(res.data.id);
+                        localStorage.setItem("id", res.data.id)
+
+                        navigate("/")
+                        window.location.reload()
+                    })
             })
             .catch(res => {
                 setResponseError(res.response?.data.description)
