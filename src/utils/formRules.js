@@ -18,6 +18,7 @@ export const formRules = {
         }
     },
     postFile: {required},
+    storyFile: {required},
     profilePicture: {required},
     fullName: {
         maxLength: {

@@ -14,6 +14,12 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),
+    createStory: (data) => instance.post("/users/profile/stories", data, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
     getUserProfile: (userId) => instance.get(`users/${userId}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -49,7 +55,7 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
     }),
-    getUserFollowedPosts: () => instance.get(`https://localhost:7199/api/posts/followers?page=1&quantity=5`, {
+    getUserFollowedPosts: (page, quantity) => instance.get(`https://localhost:7199/api/posts/followers?page=${page}&quantity=${quantity}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
@@ -60,6 +66,11 @@ export const requests = {
         },
     }),
     getFollowingStories: () => instance.get(`following/stories`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+    }),
+    getUserStories: (userId) => instance.get(`users/${userId}/stories`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
@@ -102,7 +113,7 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),
-    followUser: (userId) => instance.post(`https://localhost:7199/follow/${userId}`, {
+    followUser: (userId) => instance.post(`https://localhost:7199/follow/${userId}`, null,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }

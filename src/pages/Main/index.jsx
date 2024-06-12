@@ -1,22 +1,41 @@
 import React, {useRef, useState, useEffect} from 'react'
-import {stories} from "../../utils/tempData.js"
 import Story from "../../components/Story/index.jsx"
 import {requests} from "../../api/requests.js"
 import {Loader, Post, StoryModal} from "../../components"
+import InfiniteScroll from "react-infinite-scroll-component"
+import {useGetCurrentUser} from "../../hooks/index.js"
 
 const Main = () => {
     const [isStoryModalActive, setIsStoryModalActive] = useState(false)
     const storyRefs = useRef({})
-    const [posts, setPosts] = useState()
+    const [posts, setPosts] = useState([])
+    const [stories, setStories] = useState([])
     const [page, setPage] = useState(1)
+    const [hasMorePosts, setHasMorePosts] = useState(true)
+    const currentUser = useGetCurrentUser()
+    const PAGE_SIZE = 10
 
+    const fetchInterestingPosts = (currentPage) => {
+        requests.getUserFollowedPosts(currentPage, PAGE_SIZE)
+            .then(res => setPosts(() => {
+                if (res.data.length === 0) setHasMorePosts(false)
+                return posts.concat(res.data)
+            }))
+    }
+
+    const fetchMoreFollowingPosts = () => {
+        setPage(prevPage => {
+            const nextPage = prevPage + 1
+            fetchInterestingPosts(nextPage)
+            return nextPage
+        })
+    }
 
     useEffect(() => {
-        requests.getUserFollowedPosts()
-            .then(res => setPosts(res.data))
+        fetchInterestingPosts(page)
 
         requests.getFollowingStories()
-            .then(res => console.log(res))
+            .then(res => setStories(res.data))
     }, [])
 
     const scrollToStory = (storyId) => {
@@ -34,7 +53,7 @@ const Main = () => {
         scrollToStory(story.id)
     }
 
-    if (!posts) return <Loader/>
+    if (!posts || !stories) return <Loader/>
     return (
         <div className={"px-20 py-24"}>
             <StoryModal
@@ -48,30 +67,37 @@ const Main = () => {
                     stories.map(i => (
                         <Story
                             key={i.id}
-                            profilePicture={i.user.profilePicture}
+                            profilePicture={i.profilePicture}
+                            login={i.login}
                             id={i.id}
                             onClick={() => handleStoryClick(i)}
                         />
                     ))
                 }
             </div>
-            <hr className={"border-emerald-300 my-10"}/>
-            <div className={"px-20 py-24 w-1/2 mx-auto"}>
+            <hr className={"border-emerald-300 mt-10"}/>
+            <InfiniteScroll
+                className={"py-24"}
+                dataLength={posts.length}
+                hasMore={hasMorePosts}
+                loader={<Loader className={"h-auto"}/>}
+                next={() => fetchMoreFollowingPosts()}
+            >
                 {
-                    posts?.map(p => (
+                    posts.map(p => (
                         <Post
+                            currentUserId={currentUser.id}
                             key={p.id}
                             id={p.id}
                             mediaUrl={p.mediaUrl}
                             description={p.description}
-                            comments={p.comments}
                             createdDate={p.createdDate}
                             likes={p.likes}
                             user={p.user}
                         />
                     ))
                 }
-            </div>
+            </InfiniteScroll>
         </div>
     )
 }

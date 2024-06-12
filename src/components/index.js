@@ -27,6 +27,8 @@ import PostComment from "./PostComment"
 import ProfilePost from './ProfilePost'
 import CreateAiPostForm from './CreateAiPostForm'
 import FollowersNumber from "./FollowersNumber/FollowersNumber.jsx"
+import CreateStoryForm from "./CreateStoryForm"
+import ProfileStoriesModal from './ProfileStoriesModal'
 
 export{
     Logo,
@@ -57,5 +59,7 @@ export{
     PostComment,
     ProfilePost,
     CreateAiPostForm,
-    FollowersNumber
+    FollowersNumber,
+    CreateStoryForm,
+    ProfileStoriesModal
 }

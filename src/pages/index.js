@@ -6,7 +6,7 @@ import Login from './Login'
 import Interesting from './Interesting'
 import Search from './Search'
 import Messanger from './Messanger'
-import CreatePost from "./CreatePost"
+import Create from "./Create"
 import EditProfile from './EditProfile'
 import CreateAiPostForm from '../components/CreateAiPostForm'
 import CreateAiPost from './CreateAiPost'
@@ -21,7 +21,7 @@ export {
     Interesting,
     Search,
     Messanger,
-    CreatePost,
+    Create,
     EditProfile,
     CreateAiPostForm,
     CreateAiPost,
