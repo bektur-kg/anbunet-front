@@ -10,7 +10,7 @@ const Empty = (
             <ImFilesEmpty className={"text-8xl text-emerald-300"}/>
             <span className={"text-2xl text-emerald-400"}>{text}</span>
         </div>
-    );
-};
+    )
+}
 
-export default Empty;
+export default Empty

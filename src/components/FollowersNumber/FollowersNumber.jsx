@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { requests } from "../../api/requests.js";
 import ProfilePicture from "../../components/ProfilePicture/ProfilePicture.jsx";
 import { useNavigate } from "react-router";
@@ -20,6 +20,7 @@ function FollowersNumber({ userId }) {
   const [userName, setUserName] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [followCounter, setFollowCounter] = useState(0);
+  const [test, setTest] = useState(false);
 
   useEffect(() => {
     requests.getUserFollowings(userId).then((res) => {
@@ -37,41 +38,67 @@ function FollowersNumber({ userId }) {
     });
 
     requests.getUserFollowings(myId).then((res) => {
-      const res2 = res.data.map(item => item.id)
+      const res2 = res.data.map((item) => item.id);
       setMyFollowings(res2);
     });
-  }, [userId]);
+  }, [userId, myFollowings]);
 
-  const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png";
+  const url =
+    "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png";
 
-  const outputFollowings = () => (
-    <>
-      {mapper.map((i) => (
-        <div key={i.login} className="mx-auto py-2 px-3 rounded bg-white/65 flex flex-row items-center">
-          {i.login && (
-            <>
-              <ProfilePicture url={i.profilePicture ? i.profilePicture : url} />
-              <span
-               
-                className="text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5"
-              >
-                <span
-                 onClick={() => {
-                  navigate(`/profile/${i.id}`);
-                  setShowModal(false);
-                }}>{i.login}</span><span className={
-                    "text-blue-800 text-base ml-2 "
-                  }>{myFollowings.includes(i.id)?<span onClick={() => {
-                    unFollowUser(i.id);}} className={
-                    "text-blue-300 text-base"
-                  }>subscribed</span>:<span onClick={() => {
-                    followUser(i.id);}} className={"bg-blue-400 text-white-800 rounded p-1"}>subscribe</span>}</span>
-              </span>
-            </>
-          )}
-        </div>
-      ))}
-    </>
+  const outputFollowings = useMemo(
+    () => (
+      <>
+        {mapper.map((i) => (
+          <div
+            key={i.login}
+            className="mx-auto py-2 px-3 rounded bg-white/65 flex flex-row items-center justify-between"
+          >
+            {i.login && (
+              <>
+              <span className=" rounded bg-white/65 flex flex-row items-center">
+                <ProfilePicture
+                  url={i.profilePicture ? i.profilePicture : url}
+                />
+                <span className="text-black-800 font-bold text-xl hover:text-blue-800 hover:cursor-pointer text-center ml-5 ">
+                  <span 
+                    onClick={() => {
+                      navigate(`/profile/${i.id}`);
+                      setShowModal(false);
+                    }}
+                  >
+                    {i.login}
+                  </span></span>
+                  <span className={"text-blue-800 p-2 text-base ml-2 flex  "}>
+                    {myFollowings.includes(i.id) ? (
+                      <span
+                        onClick={() => {
+                          unFollowUser(i.id);
+                        }}
+                        className={"text-blue-300 text-base"}
+                      >
+                        subscribed
+                      </span>
+                    ) : (
+                      <span
+                        onClick={() => {
+                          followUser(i.id);
+                          setTest;
+                        }}
+                        className={"bg-blue-400 text-white-800 rounded p-1 "}
+                      >
+                        subscribe
+                      </span>
+                    )}
+                  </span>
+                </span>
+              </>
+            )}
+          </div>
+        ))}
+      </>
+    ),
+    [followCounter, followers, myFollowings, followings, showModal]
   );
 
   function openModal1() {
@@ -82,14 +109,13 @@ function FollowersNumber({ userId }) {
   }
 
   function followUser(id) {
-    requests.followUser(id)
-    setFollowCounter(followCounter+1)
+    requests.followUser(id);
+    setFollowCounter(followCounter + 1);
   }
   function unFollowUser(id) {
-    requests.unfollowUser(id)
-    setFollowCounter(followCounter+1)
+    requests.unfollowUser(id);
+    setFollowCounter(followCounter + 1);
   }
-
 
   function openModal2() {
     setNumberOf(followings.length);
@@ -119,9 +145,7 @@ function FollowersNumber({ userId }) {
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">
-                    {labelOf}
-                  </h3>
+                  <h3 className="text-3xl font-semibold">{labelOf}</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
@@ -133,7 +157,7 @@ function FollowersNumber({ userId }) {
                 </div>
                 <div className="relative p-6 flex-auto">
                   <div className="my-4 text-blueGray-500 text-lg leading-relaxed">
-                    {outputFollowings()}
+                    {outputFollowings}
                   </div>
                 </div>
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">

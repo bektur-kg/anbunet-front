@@ -1,6 +1,6 @@
 import Logo from './Logo'
 import LoginForm from './LoginForm'
-import FormInput from "./FormInput";
+import FormInput from "./FormInput"
 import Button from './Button'
 import Loader from './Loader'
 import PostUser from './PostUser'
@@ -18,6 +18,7 @@ import PostModalWindow from './PostModalWindow'
 import PostComment from "./PostComment"
 import ProfilePost from './ProfilePost'
 import CreateAiPostForm from './CreateAiPostForm'
+import LiveInput from './LiveInput'
 
 export{
     Logo,
@@ -38,6 +39,7 @@ export{
     ChangePasswordForm,
     PostModalWindow,
     PostComment,
-    ProfilePost
-    CreateAiPostForm
+    ProfilePost,
+    CreateAiPostForm,
+    LiveInput
 }

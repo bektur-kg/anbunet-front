@@ -102,7 +102,7 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),
-    followUser: (userId) => instance.post(`https://localhost:7199/follow/${userId}`, {
+    followUser: (userId) => instance.post(`https://localhost:7199/follow/${userId}`, null ,{
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -111,5 +111,10 @@ export const requests = {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
-    })
+    }),
+    getPostLikes: (postId) => instance.get(`posts/${postId}/likes`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+    }),
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, FormInput} from "../index.js";
+import {Button, FormInput, LiveInput} from "../index.js";
 import {Link} from "react-router-dom";
 
 const SearchForm = (
@@ -22,7 +22,7 @@ const SearchForm = (
                     <h2 className={"text-3xl font-medium mb-14"}>{formTitle}</h2>
                 </div>
                 <div className={"w-full flex flex-col"}>
-                    <FormInput
+                    <LiveInput
                         inputType={"string"}
                         registerName={"login"}
                         placeholder={"Username"}
