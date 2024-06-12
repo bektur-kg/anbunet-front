@@ -10,6 +10,12 @@ const SearchChat = () => {
         requests.getUserSearch(searchValue).then(res => setFoundUsers(res.data))
     }, [searchValue])
 
+    const createChatHandler = (userId) => {
+        requests.createChat(userId)
+        setSearchValue("")
+        setFoundUsers(null)
+    }
+
     return (
         <div className='search'>
             <div className='searchForm'>
@@ -22,12 +28,13 @@ const SearchChat = () => {
             </div>
             {
                 searchValue &&
-                <div className="userChat flex flex-col">
+                <div className=" flex flex-col">
                 {
                     foundUsers.map(u => (
-                        <div
+                        <div clas
                             key={u.id}
-                            className="flex items-center gap-2 w-full"
+                            className="userChat flex items-center gap-2 w-full"
+                            onClick={() => createChatHandler(u.id)}
                         >
                             <img
                                 src={u.profilePicture ? u.profilePicture : "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"}

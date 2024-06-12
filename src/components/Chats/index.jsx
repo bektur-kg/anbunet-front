@@ -1,38 +1,23 @@
 import React from 'react';
+import { Loader } from '../../components';
 
-const Chats = () => {
+const Chats = ({ chats }) => {
+
+    if (!chats) return <Loader />
     return (
         <div className='chats'>
-            <div className="userChat">
-                <img src="https://avatars.githubusercontent.com/u/74071701?v=4" alt="" />
-                <div className="userChatInfo">
-                    <span>Bektur</span>
-                    <p>Hello</p>
+            {chats.map(c => (
+                <div className="userChat" key={c.id}>
+                    <img 
+                        src={c.user.profilePicture || "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"}
+                        alt="" />
+                    <div className="userChatInfo">
+                        <span>{c.user.login}</span>
+                        <p>{c.messages[c.messages.length - 1]}</p>
+                    </div>
                 </div>
-            </div>
-            <div className="userChat">
-                <img src="https://avatars.githubusercontent.com/u/74071701?v=4" alt="" />
-                <div className="userChatInfo">
-                    <span>Bektur</span>
-                    <p>Hello</p>
-                </div>
-            </div>
-            <div className="userChat">
-                <img src="https://avatars.githubusercontent.com/u/74071701?v=4" alt="" />
-                <div className="userChatInfo">
-                    <span>Bektur</span>
-                    <p>Hello</p>
-                </div>
-            </div>
-            <div className="userChat">
-                <img src="https://avatars.githubusercontent.com/u/74071701?v=4" alt="" />
-                <div className="userChatInfo">
-                    <span>Bektur</span>
-                    <p>Hello</p>
-                </div>
-            </div>
+            ))}
         </div>
-        
     );
 };
 

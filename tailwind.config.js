@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        'purple-bg': "#a7bcff"
+      },
       height:{
         'card': '38rem',
         'story': '34rem',
