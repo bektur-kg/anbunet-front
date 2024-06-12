@@ -3,7 +3,6 @@ import {Button, Empty, Loader, Post, Actual, ProfilePost, FollowersNumber} from 
 import {requests} from "../../api/requests.js"
 import {acutals} from "../../utils/tempData.js"
 import {useNavigate, useParams} from "react-router-dom"
-import FollowersNumber from '../../components/FollowersNumber/FollowersNumber.jsx'
 
 const Profile = () => {
     const [profileData, setProfileData] = useState()

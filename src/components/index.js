@@ -57,5 +57,7 @@ export{
     PostModalWindow,
     PostComment,
     ProfilePost,
-    CreateAiPostForm
+    CreateAiPostForm,
+    LiveInput,
+    FollowersNumber
 }
