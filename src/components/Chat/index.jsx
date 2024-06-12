@@ -7,7 +7,7 @@ import InputChat from '../InputChat';
 
 
 
-const Chat = () => {
+const Chat = ({chatInfo}) => {
 
     return (
         <div className="chat">

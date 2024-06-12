@@ -31,7 +31,7 @@ const SearchChat = () => {
                 <div className=" flex flex-col">
                 {
                     foundUsers.map(u => (
-                        <div clas
+                        <div
                             key={u.id}
                             className="userChat flex items-center gap-2 w-full"
                             onClick={() => createChatHandler(u.id)}
