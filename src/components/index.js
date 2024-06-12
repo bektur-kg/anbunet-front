@@ -27,6 +27,7 @@ import PostComment from "./PostComment"
 import ProfilePost from './ProfilePost'
 import CreateAiPostForm from './CreateAiPostForm'
 import FollowersNumber from "./FollowersNumber/FollowersNumber.jsx"
+import LiveInput from './LiveInput'
 
 export{
     Logo,
@@ -56,6 +57,5 @@ export{
     PostModalWindow,
     PostComment,
     ProfilePost,
-    CreateAiPostForm,
-    FollowersNumber
+    CreateAiPostForm
 }

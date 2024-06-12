@@ -3,9 +3,10 @@ import {Button, Empty, Loader, Post, Actual, ProfilePost, FollowersNumber} from 
 import {requests} from "../../api/requests.js"
 import {acutals} from "../../utils/tempData.js"
 import {useNavigate, useParams} from "react-router-dom"
+import FollowersNumber from '../../components/FollowersNumber/FollowersNumber.jsx'
 
 const Profile = () => {
-    const [profileData, setProfileData] = useState(null)
+    const [profileData, setProfileData] = useState()
     const [currentUserId, setCurrentUserId] = useState(0)
     const navigate = useNavigate()
     const { id } = useParams()
@@ -90,7 +91,7 @@ const Profile = () => {
                                 <ProfilePost
                                     key={i.id}
                                     createdDate={i.createdDate}
-                                    mediaUrl={i.mediaUrl}
+                                    mediaUrl={"https://localhost:7199/".concat(`${i.mediaUrl}`).replace("https://localhost:7199/http", "http")}
                                     id={i.id}
                                     commentsCount={i.commentsCount}
                                     likesCount={i.likesCount}
