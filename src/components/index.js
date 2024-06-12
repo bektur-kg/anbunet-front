@@ -12,13 +12,25 @@ import StoryCard from "./StoryCard"
 import EditProfileForm from "./EditProfileForm"
 import FormTextarea from './FormTextarea'
 import FormSelect from './FormSelect'
+import Chat from './Chat'
+import Chats from './Chats'
+import InputChat from './InputChat'
+import NavbarChat from './NavbarChat'
+import SearchChat from './SearchChat'
+import MessageChat from './MessageChat'
+import SidebarChat from './SidebarChat'
+import MessagesChat from './MessagesChat'
 import Empty from './Empty'
 import ChangePasswordForm from './ChangePasswordForm'
 import PostModalWindow from './PostModalWindow'
 import PostComment from "./PostComment"
 import ProfilePost from './ProfilePost'
 import CreateAiPostForm from './CreateAiPostForm'
+<<<<<<< alex-merge
 import LiveInput from './LiveInput'
+=======
+import FollowersNumber from "./FollowersNumber/FollowersNumber.jsx"
+>>>>>>> 12JuneMerge-alex
 
 export{
     Logo,
@@ -35,11 +47,23 @@ export{
     EditProfileForm,
     FormTextarea,
     FormSelect,
+    Chat,
+    Chats,
+    InputChat,
+    MessageChat,
+    NavbarChat,
+    SearchChat,
+    SidebarChat,
+    MessagesChat,
     Empty,
     ChangePasswordForm,
     PostModalWindow,
     PostComment,
     ProfilePost,
     CreateAiPostForm,
+<<<<<<< alex-merge
     LiveInput
+=======
+    FollowersNumber
+>>>>>>> 12JuneMerge-alex
 }

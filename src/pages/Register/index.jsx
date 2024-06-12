@@ -12,8 +12,8 @@ const Register = () => {
         formState: {isValidProfileForm, errors},
         reset,
     } = useForm({ mode: 'onChange' })
-    const [responseError, setResponseError] = useState("");
-    const navigate = useNavigate();
+    const [responseError, setResponseError] = useState("")
+    const navigate = useNavigate()
 
     const submitRequestHandler = ({login, password}) => {
         reset()
@@ -27,8 +27,15 @@ const Register = () => {
                 requests.login(data)
                     .then(res => {
                         localStorage.setItem("token", res.data.token)
-                        navigate("/")
-                        window.location.reload()
+                        localStorage.setItem("login", login)
+
+                        requests.getMyProfile()
+                            .then(res => {
+                                localStorage.setItem("id", res.data.id)
+
+                                navigate("/")
+                                window.location.reload()
+                            })
                     })
             })
             .catch(res => {

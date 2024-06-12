@@ -1,3 +1,4 @@
+<<<<<<< alex-merge
 import React, { useEffect, useState } from "react";
 import { PostModalWindow, PostUser } from "../index.js";
 import { FaRegComment } from "react-icons/fa";
@@ -23,6 +24,32 @@ const Post = ({
   );
   const [doesCurrentUserLiked, setDoesCurrentUserLiked] = useState(false);
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
+=======
+import React, {useEffect, useState} from 'react'
+import {PostModalWindow, PostUser} from "../index.js"
+import {FaRegComment} from "react-icons/fa"
+import {getUrlFileExtension, formatDate} from "../../helpers/index.js"
+import {CiHeart} from "react-icons/ci"
+import {videoPostUrlExtensions} from "../../utils/postUrlExtensions.js"
+import {TiHeartFullOutline} from "react-icons/ti"
+import {requests} from "../../api/requests.js"
+import {useNavigate} from "react-router-dom"
+
+const Post = (
+    {
+        user,
+        mediaUrl,
+        id,
+        likes,
+        description,
+        currentUserId,
+        createdDate
+    }) => {
+    const isMediaVideo = videoPostUrlExtensions.includes(getUrlFileExtension(mediaUrl))
+    const [doesCurrentUserLiked, setDoesCurrentUserLiked] = useState(false)
+    const [isPostModalOpen, setIsPostModalOpen] = useState(false)
+    const navigate = useNavigate()
+>>>>>>> 12JuneMerge-alex
 
   useEffect(() => {
 
@@ -53,6 +80,7 @@ const Post = ({
 
   // console.log(likes.some((like) => like.id === currentUserId));
 
+<<<<<<< alex-merge
   return (
     <div
       className={"w-card mx-auto border px-3 py-7 rounded-xl my-10 bg-white/60"}
@@ -74,6 +102,66 @@ const Post = ({
               autoPlay={true}
               loop={true}
               muted={true}
+=======
+    return (
+        <div className={"w-card mx-auto border px-3 py-7 rounded-xl my-10 bg-white/60"}>
+            <div className={"flex flex-col gap-3"}>
+                <PostUser
+                    id={user.id}
+                    login={user.login}
+                    profilePicture={user.profilePicture}
+                />
+                <div className={"w-full h-card"}>
+                    {
+                        isMediaVideo ?
+                            <video
+                                src={mediaUrl}
+                                controls={true}
+                                className={"w-full h-full object-cover rounded-2xl cursor-pointer"}
+                                autoPlay={true}
+                                loop={true}
+                                onClick={() => setIsPostModalOpen(true)}
+                                muted={true}
+                            /> :
+                            <img
+                                onClick={() => setIsPostModalOpen(true)}
+                                src={mediaUrl}
+                                alt="postImage"
+                                className={"w-full h-full object-cover rounded cursor-pointer"}
+                            />
+                    }
+                </div>
+                <div className={"flex justify-between"}>
+                    <div className={"flex gap-2 items-center"}>
+                        {
+                            doesCurrentUserLiked ?
+                                <TiHeartFullOutline
+                                    onClick={handleRemoveLikeFromPost}
+                                    className={"text-3xl hover:cursor-pointer"}
+                                /> :
+                                <CiHeart
+                                    onClick={handleAddLikeToPost}
+                                    className={"text-3xl hover:cursor-pointer"}
+                                />
+                        }
+                        <FaRegComment
+                            className={"text-2xl hover:cursor-pointer"}
+                            onClick={() => setIsPostModalOpen(true)}
+                        />
+                    </div>
+                    <span className={"text-sm text-gray-500"}>{formatDate(createdDate)}</span>
+                </div>
+                <div>
+                    <p className={"text-gray-600"}>{description}</p>
+                </div>
+            </div>
+            <PostModalWindow
+                isActive={isPostModalOpen}
+                mediaUrl={mediaUrl}
+                postId={id}
+                isMediaVideo={isMediaVideo}
+                setIsActive={setIsPostModalOpen}
+>>>>>>> 12JuneMerge-alex
             />
           ) : (
             <img

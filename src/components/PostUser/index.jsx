@@ -13,7 +13,7 @@ const PostUser = (
     return (
         <div
             className={"flex items-center gap-3 cursor-pointer"}
-            onClick={() => navigate("")}
+            onClick={() => navigate(`/profile/${id}`)}
         >
             <div>
                 <img

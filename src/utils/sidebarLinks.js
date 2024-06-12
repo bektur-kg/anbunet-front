@@ -30,9 +30,9 @@ export const sidebarLinks = [
     },
     {
         id: 3,
-        path: "/chats",
+        path: "/messanger",
         Icon: BsFillChatSquareTextFill,
-        text: "Chats"
+        text: "Messanger"
     },
     {
         id: 4,

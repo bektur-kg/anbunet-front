@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {Logo, LoginForm} from "../../components";
-import {useForm} from "react-hook-form";
-import {requests} from "../../api/requests.js";
-import {useNavigate} from "react-router-dom";
+import React, {useState} from 'react'
+import {Logo, LoginForm} from "../../components"
+import {useForm} from "react-hook-form"
+import {requests} from "../../api/requests.js"
+import {useNavigate} from "react-router-dom"
 
 const Login = () => {
     const {
@@ -24,11 +24,17 @@ const Login = () => {
             .then(res => {
                 localStorage.setItem("token", res.data.token)
                 localStorage.setItem("login", login)
-                navigate("/")
-                window.location.reload()
+
+                requests.getMyProfile()
+                    .then(res => {
+                        console.log(res.data.id);
+                        localStorage.setItem("id", res.data.id)
+
+                        navigate("/")
+                        window.location.reload()
+                    })
             })
             .catch(res => {
-                console.log(res)
                 setResponseError(res.response?.data.description)
             }).finally(reset)
         }

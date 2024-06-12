@@ -1,8 +1,9 @@
 import {Sidebar} from "./layout"
 import {Route, Routes} from "react-router-dom"
-import {Profile, Main, NotFound, Register, Login} from "./pages"
 import { PrivateRoutes } from './helpers'
-import {privatePagesList, publicPagesList} from "./utils/pagesList.js";
+import {privatePagesList, publicPagesList} from "./utils/pagesList.js"
+import React from "react"
+import "./style.scss"
 
 function App() {
 
