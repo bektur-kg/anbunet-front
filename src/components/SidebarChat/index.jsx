@@ -3,11 +3,11 @@ import NavbarChat from '../NavbarChat';
 import SearchChat from '../SearchChat';
 import Chats from '../Chats';
 
-const SidebarChat = ({ chats }) => {
+const SidebarChat = ({ chats, setChats,connection }) => {
     return (
         <div className='sidebar'>
             <NavbarChat />
-            <SearchChat />
+            <SearchChat setChats={setChats} connection={connection}/>
             <Chats chats={chats} />
         </div>
     );

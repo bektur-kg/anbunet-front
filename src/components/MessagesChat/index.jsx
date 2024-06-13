@@ -4,7 +4,7 @@ import MessageChat from '../MessageChat';
 const MessagesChat = () => {
     return (
         <div className='messages'>
-            <MessageChat/>
+            <MessageChat />
             <MessageChat/>
             <MessageChat/>
             <MessageChat/>

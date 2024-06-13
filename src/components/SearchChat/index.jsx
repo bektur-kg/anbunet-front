@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { requests } from '../../api/requests'
 
-const SearchChat = () => {
+const SearchChat = ({connection}) => {
     const [searchValue, setSearchValue] = useState("")
     const [foundUsers, setFoundUsers] = useState([])
 
@@ -10,10 +10,16 @@ const SearchChat = () => {
         requests.getUserSearch(searchValue).then(res => setFoundUsers(res.data))
     }, [searchValue])
 
-    const createChatHandler = (userId) => {
+    const createChatHandler = async (userId) => {
+        const currentUserId = localStorage.getItem('id')
+
         requests.createChat(userId)
-        setSearchValue("")
-        setFoundUsers(null)
+            .then(async () => {
+                setSearchValue("")
+                setFoundUsers(null)
+                await connection.invoke("GetChatsByUserId",currentUserId)
+            })
+        
     }
 
     return (
