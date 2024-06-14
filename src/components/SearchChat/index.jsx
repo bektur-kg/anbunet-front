@@ -11,13 +11,12 @@ const SearchChat = ({connection}) => {
     }, [searchValue])
 
     const createChatHandler = async (userId) => {
-        const currentUserId = localStorage.getItem('id')
 
         requests.createChat(userId)
             .then(async () => {
                 setSearchValue("")
                 setFoundUsers(null)
-                await connection.invoke("GetChatsByUserId",currentUserId)
+                await connection.invoke("GetContactsAsync")
             })
         
     }

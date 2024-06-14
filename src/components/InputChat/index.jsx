@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaFileCirclePlus } from "react-icons/fa6";
 
-const InputChat = () => {
+const InputChat = ({connection,chat}) => {
+    const [message, setMessage] = useState("")
+
+    const onSendMessage = async() =>{
+        const chatId = chat.chatId
+        await connection.invoke("SendMessage", chatId,message)
+        setMessage("")
+    }
+
     return (
         <div className='input'>
-            <input type="text" placeholder='Type something' />
+            <input type="text" value={message} onChange={(e)=>setMessage(e.target.value)} placeholder='Type something' />
             <div className="send">
                 <input type="file" style={{display:"none"}} id="file"/>
                 <label htmlFor="file">
                   <FaFileCirclePlus className='cursor-pointer'/>
                 </label>
-                <button>send</button>
+                <button onClick={onSendMessage}>
+                    send
+                </button>
             </div>
         </div>
     );

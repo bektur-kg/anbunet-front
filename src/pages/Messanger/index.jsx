@@ -6,27 +6,35 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
 const Messanger = () => {
     const [connection, setConnection] = useState(null)
-    const [chats, setChats] = useState(null)
+    const [contacts, setContacts] = useState(null)
+    const [chat, setChat] = useState(null)
+
 
     const joinChat = async () => {
-        const currentUserId = localStorage.getItem('id');
+        const token = localStorage.getItem('token');
         var connection = new HubConnectionBuilder()
-            .withUrl("https://localhost:7199/chat")
+            .withUrl("https://localhost:7199/chat",{ accessTokenFactory: () => token })
             .withAutomaticReconnect()
             .build();
+
 
         connection.on("SendMessageUser", (userName, message) => {
             console.log(userName);
             console.log(message);
         })
 
-        connection.on("GetChats", (chats) => {
-            setChats(chats)
+        connection.on("Contacts", (contacts) => {
+            setContacts(contacts)
+        })
+
+        connection.on("Chat", (chat) => {
+            console.log(chat);
+            setChat(chat)
         })
 
         try {
             await connection.start();
-            await connection.invoke("JoinChat", currentUserId);
+            await connection.invoke("JoinChat");
 
             setConnection(connection)
         } catch (error) {
@@ -41,8 +49,8 @@ const Messanger = () => {
     return (
         <div className='home w-full h-screen flex justify-center items-center bg-purple-bg'>
             <div className="container">
-                <SidebarChat chats={chats} setChats={setChats} connection={connection} />
-                <Chat />
+                <SidebarChat contacts={contacts} setContacts={setContacts} connection={connection} />
+                <Chat chat={chat} connection={connection}/>
             </div>
         </div>
     );

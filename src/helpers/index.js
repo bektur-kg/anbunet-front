@@ -1,6 +1,6 @@
 import PrivateRoutes from "./PrivateRoutes.jsx"
 import getUrlFileExtension from "./getUrlFileExtension.js"
-import {formatDate} from "./dateFormater.js"
+import {formatDate, formatDateWithTime} from "./dateFormater.js"
 import {hasNonNullProperty} from "./hasNonNullProperty.js"
 import {lockWindowScrollInModal} from "./scrollHandler.js";
 
@@ -9,5 +9,6 @@ export {
     getUrlFileExtension,
     formatDate,
     hasNonNullProperty,
-    lockWindowScrollInModal
+    lockWindowScrollInModal,
+    formatDateWithTime
 }

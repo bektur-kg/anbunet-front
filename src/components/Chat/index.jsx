@@ -7,20 +7,20 @@ import InputChat from '../InputChat';
 
 
 
-const Chat = ({chatInfo}) => {
+const Chat = ({chat,connection}) => {
 
     return (
         <div className="chat">
             <div className="chatInfo">
-                <span>Erzhan</span>
+                <span>{chat?.login}</span>
                 <div className="chatIcons">
                      <RiUserAddLine className=' cursor-pointer'/>
                      <FaCamera className=' cursor-pointer'/>
                      <SlOptions className=' cursor-pointer'/>
                 </div>  
             </div>
-             <MessagesChat/>
-             <InputChat/>
+             <MessagesChat chat={chat} />
+             <InputChat chat={chat}connection={connection}/>
         </div>
     );
 };
