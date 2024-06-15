@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { FaFileCirclePlus } from "react-icons/fa6";
 
-const InputChat = ({connection,chat}) => {
+const InputChat = ({connection,chat,chatId}) => {
     const [message, setMessage] = useState("")
 
     const onSendMessage = async() =>{
-        const chatId = chat.chatId
-        await connection.invoke("SendMessage", chatId,message)
+        const currentChatId = chatId
+        await connection.invoke("SendMessage", currentChatId,message)
+        await connection.invoke("GetChatsGroup", currentChatId)
         setMessage("")
     }
 

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Loader } from '../../components';
 
-const Chats = ({ contacts, connection }) => {
+const Chats = ({ contacts, connection ,setLogin,setChatId}) => {
 
     // доделать
-    const getChat = async (chatId) => {
+    const getChat = async (chatId,login) => {
         console.log(chatId);
-        await connection.invoke("GetChat", chatId)
+        setChatId(chatId)
+        setLogin(login)
+        await connection.invoke("GetChats")
     }
     // доделать
     if (!contacts) return <Loader />
@@ -16,7 +18,7 @@ const Chats = ({ contacts, connection }) => {
                 <div
                     className="userChat"
                     key={c.id}
-                    onClick={() => getChat(c.chatId)}
+                    onClick={() => getChat(c.chatId,c.user.login)}
                 >
                     <img
                         src={c.user.profilePicture || "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"}

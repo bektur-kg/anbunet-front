@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { requests } from '../../api/requests'
 
-const SearchChat = ({connection}) => {
+const SearchChat = ({setLogin ,connection}) => {
     const [searchValue, setSearchValue] = useState("")
     const [foundUsers, setFoundUsers] = useState([])
 
@@ -10,12 +10,13 @@ const SearchChat = ({connection}) => {
         requests.getUserSearch(searchValue).then(res => setFoundUsers(res.data))
     }, [searchValue])
 
-    const createChatHandler = async (userId) => {
+    const createChatHandler = async (userId,userLogin) => {
 
         requests.createChat(userId)
             .then(async () => {
                 setSearchValue("")
                 setFoundUsers(null)
+                setLogin(userLogin)
                 await connection.invoke("GetContactsAsync")
             })
         
@@ -39,7 +40,7 @@ const SearchChat = ({connection}) => {
                         <div
                             key={u.id}
                             className="userChat flex items-center gap-2 w-full"
-                            onClick={() => createChatHandler(u.id)}
+                            onClick={() => createChatHandler(u.id,u.login)}
                         >
                             <img
                                 src={u.profilePicture ? u.profilePicture : "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"}

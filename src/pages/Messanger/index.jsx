@@ -8,7 +8,13 @@ const Messanger = () => {
     const [connection, setConnection] = useState(null)
     const [contacts, setContacts] = useState(null)
     const [chat, setChat] = useState(null)
+    const [chats, setChats] = useState(null)
+    const [chatId, setChatId] = useState(null)
+    const [login,setLogin] = useState(null)
 
+    const update =async()=>{
+        await connection.invoke("GetChats")
+    }
 
     const joinChat = async () => {
         const token = localStorage.getItem('token');
@@ -24,12 +30,21 @@ const Messanger = () => {
         })
 
         connection.on("Contacts", (contacts) => {
+            
             setContacts(contacts)
         })
 
-        connection.on("Chat", (chat) => {
-            console.log(chat);
-            setChat(chat)
+
+
+        connection.on("Chats", (chats) => {
+            console.log(chats);
+            setChats(chats)
+            console.log(chatId);
+        })
+
+        connection.on("Update", async() => {
+            await connection.invoke("GetChats")
+            console.log("Update Chats");
         })
 
         try {
@@ -49,8 +64,8 @@ const Messanger = () => {
     return (
         <div className='home w-full h-screen flex justify-center items-center bg-purple-bg'>
             <div className="container">
-                <SidebarChat contacts={contacts} setContacts={setContacts} connection={connection} />
-                <Chat chat={chat} connection={connection}/>
+                <SidebarChat setChatId={setChatId}setLogin={setLogin} contacts={contacts} setContacts={setContacts} connection={connection} />
+                <Chat chats={chats}chatId = {chatId}chat={chat} connection={connection} login={login}/>
             </div>
         </div>
     );
