@@ -44,6 +44,7 @@ const Messanger = () => {
 
         connection.on("Update", async() => {
             await connection.invoke("GetChats")
+            await connection.invoke("GetContactsAsync")
             console.log("Update Chats");
         })
 
