@@ -11,6 +11,7 @@ const Messanger = () => {
     const [chats, setChats] = useState(null)
     const [chatId, setChatId] = useState(null)
     const [login,setLogin] = useState(null)
+    const [userId,setUserId] = useState(null)
 
     const update =async()=>{
         await connection.invoke("GetChats")
@@ -65,8 +66,15 @@ const Messanger = () => {
     return (
         <div className='home w-full h-screen flex justify-center items-center bg-purple-bg'>
             <div className="container">
-                <SidebarChat setChatId={setChatId}setLogin={setLogin} contacts={contacts} setContacts={setContacts} connection={connection} />
-                <Chat chats={chats}chatId = {chatId}chat={chat} connection={connection} login={login}/>
+                <SidebarChat
+                 setUserId={setUserId}
+                 setChatId={setChatId}
+                 setLogin={setLogin}
+                  contacts={contacts} 
+                  setContacts={setContacts}
+                   connection={connection} 
+                   />
+                <Chat setChatId={setChatId}userId={userId}chats={chats}chatId = {chatId}chat={chat} connection={connection} login={login}/>
             </div>
         </div>
     );

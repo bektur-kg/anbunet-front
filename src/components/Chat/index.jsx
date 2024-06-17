@@ -7,7 +7,7 @@ import InputChat from '../InputChat';
 
 
 
-const Chat = ({chats,chat,connection,login,chatId}) => {
+const Chat = ({setChatId,userId,chats,chat,connection,login,chatId}) => {
     const currentChat = chats?.find(c => c.chatId === chatId);
 
     return (
@@ -21,7 +21,7 @@ const Chat = ({chats,chat,connection,login,chatId}) => {
                 </div>  
             </div>
              <MessagesChat chat={currentChat} />
-             <InputChat chatId={chatId}chat={chat}connection={connection}/>
+             <InputChat setChatId={setChatId}userId={userId}chatId={chatId}chat={chat}connection={connection}/>
         </div>
     );
 };

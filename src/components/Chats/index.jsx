@@ -16,7 +16,7 @@ const Chats = ({ contacts, connection ,setLogin,setChatId}) => {
     // доделать
     if (!contacts) return <Loader />
     return (
-        <div className='chats'>
+        <div className='chats hide-scrollbar'>
             {contacts.map(c => (
                 <div
                     className="userChat"

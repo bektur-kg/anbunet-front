@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { requests } from '../../api/requests'
 
-const SearchChat = ({setLogin ,connection}) => {
+const SearchChat = ({setUserId,setLogin ,connection,setChatId, contacts}) => {
     const [searchValue, setSearchValue] = useState("")
     const [foundUsers, setFoundUsers] = useState([])
 
@@ -10,15 +10,22 @@ const SearchChat = ({setLogin ,connection}) => {
         requests.getUserSearch(searchValue).then(res => setFoundUsers(res.data))
     }, [searchValue])
 
-    const createChatHandler = async (userId,userLogin) => {
+    const createChatHandler = async (userLogin,userId) => {
 
-        requests.createChat(userId)
-            .then(async () => {
+
                 setSearchValue("")
                 setFoundUsers(null)
                 setLogin(userLogin)
+
+                const contact = contacts.find(c => c.user.id === userId) 
+                if(contact){
+                    setChatId(contact.chatId)
+                }else{
+                    setChatId(null)
+                }
+
+                setUserId(userId)
                 await connection.invoke("GetContactsAsync")
-            })
         
     }
 
@@ -34,13 +41,13 @@ const SearchChat = ({setLogin ,connection}) => {
             </div>
             {
                 searchValue &&
-                <div className=" flex flex-col">
+                <div className="contacts hide-scrollbar">
                 {
                     foundUsers.map(u => (
                         <div
                             key={u.id}
-                            className="userChat flex items-center gap-2 w-full"
-                            onClick={() => createChatHandler(u.id,u.login)}
+                            className="userChat flex items-center gap-2 w-full h-20"
+                            onClick={() => createChatHandler(u.login,u.id)}
                         >
                             <img
                                 src={u.profilePicture ? u.profilePicture : "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"}

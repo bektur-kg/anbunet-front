@@ -12,7 +12,7 @@ const MessagesChat = ({ chat }) => {
     console.log(chat);
 
     return (
-        <div className='messages'>
+        <div className='messages hide-scrollbar'>
             {
                 chat.messages.map(m => (
                     <MessageChat 

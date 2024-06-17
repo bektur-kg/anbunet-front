@@ -165,7 +165,25 @@
             }
           }
         }
+
+        .chats{
+          overflow-y: auto;
+          overflow-x: hidden;
+          height: 500px;
+          grid-auto-rows: min-content;
+          grid-auto-flow: row;
+          display: grid;
+        }
   
+        .contacts{
+          overflow-y: auto;
+          overflow-x: hidden;
+          height: 500px;
+          grid-auto-rows: min-content;
+          grid-auto-flow: row;
+          display: grid;
+        }
+        
         .userChat {
           padding: 10px;
           display: flex;
