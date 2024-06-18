@@ -45,6 +45,16 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }),
+    createChat: (userId) => instance.post(`Chats`, {userId}, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
+    getChats: () => instance.get(`Chats/`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    }),
     removeLikeFromPost: (postId) => instance.delete(`posts/${postId}/likes`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`

@@ -9,6 +9,9 @@ export default {
       fontFamily: {
         custom: ['Josefin Sans'],
       },
+      colors: {
+        'purple-bg': "#a7bcff"
+      },
       height:{
         'card': '38rem',
         'story': '34rem',
