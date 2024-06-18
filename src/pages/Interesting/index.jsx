@@ -13,7 +13,7 @@ const Interesting = () => {
     const fetchInterestingPosts = (currentPage) => {
         requests.getInterestingPosts(currentPage, PAGE_SIZE)
             .then(res => setPosts(() => {
-                if(res.data.length === 0) setHasMorePosts(false)
+                if (res.data.length === 0) setHasMorePosts(false)
                 return posts.concat(res.data)
             }))
     }
@@ -42,20 +42,20 @@ const Interesting = () => {
             loader={<Loader className={"h-auto"}/>}
             next={() => fetchMoreInterestingPosts()}
         >
-                {
-                    posts.map(p => (
-                        <Post
-                            currentUserId={currentUserId}
-                            key={p.id}
-                            id={p.id}
-                            mediaUrl={p.mediaUrl}
-                            description={p.description}
-                            createdDate={p.createdDate}
-                            likes={p.likes}
-                            user={p.user}
-                        />
-                    ))
-                }
+            {
+                posts.map(p => (
+                    <Post
+                        currentUserId={currentUserId}
+                        key={p.id}
+                        id={p.id}
+                        mediaUrl={p.mediaUrl}
+                        description={p.description}
+                        createdDate={p.createdDate}
+                        likes={p.likes}
+                        user={p.user}
+                    />
+                ))
+            }
         </InfiniteScroll>
     )
 }

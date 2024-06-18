@@ -27,6 +27,11 @@ import PostComment from "./PostComment"
 import ProfilePost from './ProfilePost'
 import CreateAiPostForm from './CreateAiPostForm'
 import FollowersNumber from "./FollowersNumber/FollowersNumber.jsx"
+import CreateStoryForm from "./CreateStoryForm"
+import ProfileStoriesModal from './ProfileStoriesModal'
+import ActualCreateForm from './ActualCreateForm'
+import ActualModal from './ActualModal'
+import ActualCard from './ActualCard'
 import LiveInput from './LiveInput'
 import LoaderSmall from './LoaderSmall'
 
@@ -61,5 +66,10 @@ export{
     CreateAiPostForm,
     LiveInput,
     FollowersNumber,
-    LoaderSmall
+    LoaderSmall,
+    CreateStoryForm,
+    ProfileStoriesModal,
+    ActualCreateForm,
+    ActualModal,
+    ActualCard
 }

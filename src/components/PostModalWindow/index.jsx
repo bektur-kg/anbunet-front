@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import cn from "classnames"
 import {formatDate, lockWindowScrollInModal} from "../../helpers"
-import {PostComment} from "../index.js";
-import {IoIosSend} from "react-icons/io";
-import {requests} from "../../api/requests.js";
+import {PostComment} from "../index.js"
+import {IoIosSend} from "react-icons/io"
+import {requests} from "../../api/requests.js"
 import {TiHeartFullOutline} from "react-icons/ti";
 import {CiHeart} from "react-icons/ci";
 
@@ -24,7 +24,7 @@ const PostModalWindow = (
     }
 
     const handleSendComment = () => {
-        requests.sendComment({postId, text: newComment })
+        requests.sendComment(postId, {text: newComment })
             .then(fetchComments)
 
         setNewComment("")
@@ -32,7 +32,7 @@ const PostModalWindow = (
 
     useEffect(() => {
         fetchComments()
-    }, []);
+    }, [])
 
 
 
@@ -63,7 +63,7 @@ const PostModalWindow = (
                     }
                 </div>
                 <div className={"w-1/2 h-full flex flex-col justify-between"}>
-                    <div className={"overflow-x-auto w-full h-full grid custom-scrollbar"}>
+                    <div className={"overflow-y-auto w-full h-full grid grid-flow-row auto-rows-min custom-scrollbar"}>
                         {
                             comments.map(i => (
                                 <PostComment

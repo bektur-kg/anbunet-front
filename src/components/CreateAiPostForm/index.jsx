@@ -59,7 +59,7 @@ const CreateAiPostForm = ({
         </div>
         <Link
                     className={"text-blue-400 hover:text-blue-600 hover:underline mt-4"}
-                    to={ "/createPost"}
+                    to={ "/create"}
                 >{"Upload your own image"}</Link>
       </form>
     </div>

@@ -1,38 +1,31 @@
-import React, {useState} from 'react';
-import {videoPostUrlExtensions} from "../../utils/postUrlExtensions.js";
-import {getUrlFileExtension} from "../../helpers/index.js";
-import cn from "classnames";
-import {IoIosArrowBack, IoIosArrowForward} from "react-icons/io";
-import {PostUser} from "../index.js";
+import React, {useState} from 'react'
+import {videoPostUrlExtensions} from "../../utils/postUrlExtensions.js"
+import {getUrlFileExtension} from "../../helpers/index.js"
+import cn from "classnames"
+import {IoIosArrowBack, IoIosArrowForward} from "react-icons/io"
 
-const StoryCard = (
+const ActualCard = (
     {
         mediaUrlList,
-        userId,
-        userLogin,
-        userProfilePicture,
-        storyRefs,
-        id,
+        actualName,
+        actualRefs,
+        actualId,
     }) => {
     const [currentMedia, setCurrentMedia] = useState(0)
 
-    const setStoryRef = (id, element) => {
-        storyRefs.current[id] = element
+    const setActualRefs = (id, element) => {
+        actualRefs.current[id] = element
     }
 
     return (
         <div
             className={"h-full flex flex-col justify-center snap-center snap-always"}
-            ref={(el) => setStoryRef(id, el)}
+            ref={(el) => setActualRefs(actualId, el)}
         >
-            <div className={"pb-2"}>
-                <PostUser
-                    id={userId}
-                    login={userLogin}
-                    profilePicture={userProfilePicture}
-                />
+            <div className={"pb-2 text-lg font-medium"}>
+                <span>{actualName}</span>
             </div>
-            <div className={"h-story w-story rounded relative"}>
+            <div className={"h-story w-story relative rounded"}>
                 {
                     mediaUrlList.map((i, index) => {
                         const isMediaVideo = videoPostUrlExtensions.includes(getUrlFileExtension(i.mediaUrl))
@@ -58,7 +51,7 @@ const StoryCard = (
                     })
                 }
             </div>
-            <div className={"flex justify-center my-2 items-center gap-2 "}>
+            <div className={"flex justify-center my-2 items-center gap-2"}>
                 <button
                     className={cn("bg-green-400 px-2 py-1 rounded", {["opacity-50 cursor-not-allowed"]: currentMedia === 0})}
                     onClick={() => setCurrentMedia(prevState => --prevState)}
@@ -82,4 +75,4 @@ const StoryCard = (
     )
 }
 
-export default StoryCard
+export default ActualCard

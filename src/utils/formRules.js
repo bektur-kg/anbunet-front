@@ -18,6 +18,14 @@ export const formRules = {
         }
     },
     postFile: {required},
+    storyFile: {required},
+    actualName: {
+        required,
+        maxLength: {
+            value: 15,
+            message: "Maximum length of an actual has to be less than 16"
+        }
+    },
     profilePicture: {required},
     fullName: {
         maxLength: {

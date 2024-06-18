@@ -36,7 +36,7 @@ export const sidebarLinks = [
     },
     {
         id: 4,
-        path: "/createPost",
+        path: "/create",
         Icon: FaSquarePlus,
         text: "Create"
     },

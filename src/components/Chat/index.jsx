@@ -7,20 +7,21 @@ import InputChat from '../InputChat';
 
 
 
-const Chat = () => {
+const Chat = ({setChatId,userId,chats,connection,login,chatId}) => {
+    const currentChat = chats?.find(c => c.chatId === chatId);
 
     return (
         <div className="chat">
             <div className="chatInfo">
-                <span>Erzhan</span>
+                <span>{login}</span>
                 <div className="chatIcons">
                      <RiUserAddLine className=' cursor-pointer'/>
                      <FaCamera className=' cursor-pointer'/>
                      <SlOptions className=' cursor-pointer'/>
                 </div>  
             </div>
-             <MessagesChat/>
-             <InputChat/>
+             <MessagesChat chat={currentChat} />
+             <InputChat setChatId={setChatId}userId={userId}chatId={chatId}connection={connection}/>
         </div>
     );
 };

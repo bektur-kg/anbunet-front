@@ -23,8 +23,10 @@ const Post = (
     const [isPostModalOpen, setIsPostModalOpen] = useState(false)
     const navigate = useNavigate()
 
+
     useEffect(() => {
-        setDoesCurrentUserLiked(likes.some(like => like.id === currentUserId))
+        //todo: remove ? from like.user?.id
+        setDoesCurrentUserLiked(!!likes.find(like =>  like.user?.id === currentUserId))
     }, [likes])
 
     const handleAddLikeToPost = () => {

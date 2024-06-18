@@ -1,7 +1,7 @@
-import React, {useEffect, useRef} from 'react';
-import {StoryCard} from "../index.js";
+import React, {useEffect, useRef} from 'react'
+import {StoryCard} from "../index.js"
 import cn from 'classnames'
-import {lockWindowScrollInModal} from "../../helpers/index.js";
+import {lockWindowScrollInModal} from "../../helpers/index.js"
 
 const StoryModal = (
     {
@@ -13,7 +13,7 @@ const StoryModal = (
 
     useEffect(() => {
         lockWindowScrollInModal(isActive)
-    }, [isActive]);
+    }, [isActive])
 
     return (
         <div className={cn("bg-emerald-950/60 top-0 left-0 p-20 w-full h-full fixed transition-all z-10", {hidden: !isActive})}>
@@ -25,8 +25,10 @@ const StoryModal = (
                                 storyRefs={storyRefs}
                                 key={i.id}
                                 id={i.id}
-                                user={i.user}
-                                mediaUrlList={i.storyList}
+                                userId={i.id}
+                                userLogin={i.login}
+                                userProfilePicture={i.profilePicture}
+                                mediaUrlList={i.stories}
                             />
                         ))
                     }
@@ -39,7 +41,7 @@ const StoryModal = (
                  >&times;</span>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StoryModal;
+export default StoryModal

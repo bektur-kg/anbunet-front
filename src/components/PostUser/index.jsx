@@ -6,7 +6,6 @@ const PostUser = (
         id,
         login,
         profilePicture,
-        onClick
     }) => {
     const navigate = useNavigate()
 
