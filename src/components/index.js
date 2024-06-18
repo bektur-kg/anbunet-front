@@ -28,6 +28,7 @@ import ProfilePost from './ProfilePost'
 import CreateAiPostForm from './CreateAiPostForm'
 import FollowersNumber from "./FollowersNumber/FollowersNumber.jsx"
 import LiveInput from './LiveInput'
+import LoaderSmall from './LoaderSmall'
 
 export{
     Logo,
@@ -59,5 +60,6 @@ export{
     ProfilePost,
     CreateAiPostForm,
     LiveInput,
-    FollowersNumber
+    FollowersNumber,
+    LoaderSmall
 }

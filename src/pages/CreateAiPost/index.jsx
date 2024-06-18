@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { CreateAiPostForm } from '../../components/index.js';
+import { CreateAiPostForm, LoaderSmall } from '../../components/index.js';
 import { requests } from "../../api/requests.js";
 
 const CreateAiPost = () => {
@@ -15,9 +15,12 @@ const CreateAiPost = () => {
 
   const { register, handleSubmit, formState: { isValid, errors }, reset } = useForm({ mode: 'onSubmit' });
   const [responseError, setResponseError] = useState('');
+  const [loaderActive, setLoaderActive] = useState(false);
 
   const createImageHandler = async () => {
+    
     try {
+      setLoaderActive(true);
       const response = await fetch('https://api.limewire.com/api/image/generation', {
         method: 'POST',
         headers: {
@@ -33,12 +36,13 @@ const CreateAiPost = () => {
       });
       const result = await response.json();
       if (result && result.data && result.data[0] && result.data[0].asset_url) {
+        setLoaderActive(false);
         setImageUrl(result.data[0].asset_url);
       } else {
         throw new Error('Failed to generate image');
       }
     } catch (err) {
-      setResponseError('Failed to generate image');
+      setResponseError('Failed to generate image.');
       console.error('Error generating image:', err);
     }
   };
@@ -66,7 +70,7 @@ const CreateAiPost = () => {
           .then((res) => {
             console.log(res);
             reset();
-            setImageUrl('');
+            setImageUrl('./128px-placeholder.png');
           })
           .catch((err) => {
             setResponseError(err.response.data.description);
@@ -90,8 +94,8 @@ const CreateAiPost = () => {
         onChangeFunc={onPromptChange}
         clickFunc={createImageHandler} 
       />
-      <div className="text-red-400 mt-10 text-center">{responseError}</div>
-      <img className="max-w-sm mt-10 self-center object-scale-down rounded-2xl" alt="preview image" src={imageUrl} />
+      <div className="text-red-400 mt-5 text-center">{responseError}</div>
+      {loaderActive?<div className={'flex justify-center'}><LoaderSmall/></div>:<img className="max-w-sm  mt-2 self-center object-scale-down rounded-2xl" alt="preview image" src={imageUrl} />}
     </div>
   );
 };
