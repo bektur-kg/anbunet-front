@@ -65,7 +65,7 @@ export const requests = {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
     }),
-    getUserFollowings: (userId) => instance.get(`users/${userId}/followings`, {
+    getUserFollowings: (userId) => instance.get(`https://localhost:7199/followings/${userId}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
