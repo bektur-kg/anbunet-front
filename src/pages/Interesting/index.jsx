@@ -32,6 +32,7 @@ const Interesting = () => {
         fetchInterestingPosts(page)
     }, [])
 
+
     if (!posts.length) return <Loader/>
     return (
         <InfiniteScroll

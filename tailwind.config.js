@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        custom: ['Josefin Sans'],
+      },
       height:{
         'card': '38rem',
         'story': '34rem',

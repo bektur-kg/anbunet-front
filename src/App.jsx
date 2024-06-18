@@ -4,13 +4,14 @@ import { PrivateRoutes } from './helpers'
 import {privatePagesList, publicPagesList} from "./utils/pagesList.js"
 import React from "react"
 import "./style.scss"
+import "./index.css"
 
 function App() {
 
   return (
       <div className={"bg-gradient-to-r from-emerald-200/90 from-10% via-indigo-200/80 via-70% to-sky-200/90 to-90% min-h-screen"}>
           <Sidebar/>
-          <div className="w-5/6 ml-auto">
+          <div className="w-5/6 ml-auto main-content">
               <Routes>
                   <Route element={<PrivateRoutes/>}>
                       {

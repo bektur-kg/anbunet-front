@@ -29,6 +29,9 @@ import CreateAiPostForm from './CreateAiPostForm'
 import FollowersNumber from "./FollowersNumber/FollowersNumber.jsx"
 import CreateStoryForm from "./CreateStoryForm"
 import ProfileStoriesModal from './ProfileStoriesModal'
+import ActualCreateForm from './ActualCreateForm'
+import ActualModal from './ActualModal'
+import ActualCard from './ActualCard'
 
 export{
     Logo,
@@ -61,5 +64,8 @@ export{
     CreateAiPostForm,
     FollowersNumber,
     CreateStoryForm,
-    ProfileStoriesModal
+    ProfileStoriesModal,
+    ActualCreateForm,
+    ActualModal,
+    ActualCard
 }

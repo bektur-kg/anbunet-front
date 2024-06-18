@@ -1,11 +1,12 @@
-import {NavLink} from "react-router-dom";
-import {sidebarLinks} from "../../utils/sidebarLinks.js";
-import cn from 'classnames';
-import {Logo} from "../../components";
+import {NavLink} from "react-router-dom"
+import {sidebarLinks} from "../../utils/sidebarLinks.js"
+import cn from 'classnames'
+import {Logo} from "../../components"
+import styles from './Sidebar.module.scss'
 
 const Sidebar = () => {
     return (
-        <div className={"w-1/6 h-screen bg-green-300 flex flex-col justify-around items-center fixed"}>
+        <div className={`${styles.root} w-1/6 h-screen bg-green-300 flex flex-col justify-around items-center fixed`}>
             <Logo/>
             <div className={"w-full"}>
                 <nav className={"w-full"}>
@@ -24,7 +25,7 @@ const Sidebar = () => {
                                     <Icon
                                         className={"text-2xl"}
                                     />
-                                    {text}
+                                    <span>{text}</span>
                                 </NavLink>
                             ))
                         }
@@ -35,7 +36,7 @@ const Sidebar = () => {
 
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Sidebar;
+export default Sidebar

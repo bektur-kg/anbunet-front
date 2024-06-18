@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {
     Button,
     Empty,
@@ -6,18 +6,21 @@ import {
     Actual,
     ProfilePost,
     FollowersNumber,
-    ProfileStoriesModal
+    ProfileStoriesModal, ActualCreateForm, ActualModal
 } from "../../components"
 import {requests} from "../../api/requests.js"
-import {acutals} from "../../utils/tempData.js"
 import {useNavigate, useParams} from "react-router-dom"
 import {useGetCurrentUser} from "../../hooks/index.js"
+import {HiPlus} from "react-icons/hi"
 
 const Profile = () => {
     const [profileData, setProfileData] = useState()
     const [currentUserFollowings, setCurrentUserFollowings] = useState()
     const [doesCurrentUserFollows, setDoesCurrentUserFollows] = useState(false)
     const [isStoriesModalOpen, setIsStoriesModalOpen] = useState(false)
+    const [isActualsModalOpen, setIsActualsModalOpen] = useState(false)
+    const [isActualCreateModalOpen, setIsActualCreateModalOpen] = useState(false)
+    const actualRefs = useRef({})
     const navigate = useNavigate()
     const {id} = useParams()
     const currentUser = useGetCurrentUser()
@@ -39,23 +42,48 @@ const Profile = () => {
     }, [id])
 
     const handleFollow = () => {
-        requests.followUser(id).then()
-        fetchUserProfile()
-        fetchCurrentUserFollowings()
+        requests.followUser(id).then(() => {
+            fetchUserProfile()
+            fetchCurrentUserFollowings()
+        })
 
         //TODO: FIX FOR AUTOMATIC STATE CHANGING
         window.location.reload()
     }
 
     const handleUnfollow = () => {
-        requests.unfollowUser(id).then()
-        fetchUserProfile()
-        fetchCurrentUserFollowings()
+        requests.unfollowUser(id).then(() => {
+            fetchUserProfile()
+            fetchCurrentUserFollowings()
+        })
 
         //TODO: FIX FOR AUTOMATIC STATE CHANGING
         window.location.reload()
     }
 
+    const logoutHandler = () => {
+        localStorage.removeItem("token")
+        localStorage.removeItem("id")
+        localStorage.removeItem("login")
+
+        navigate("/login")
+        window.location.reload()
+    }
+
+    const scrollToActual = (actualId) => {
+        setTimeout(function () {
+            actualRefs.current[actualId].scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+                inline: "center"
+            })
+        }, 0)
+    }
+
+    const handleActualClick = (actual) => {
+        setIsActualsModalOpen(true)
+        scrollToActual(actual.id)
+    }
 
     if (!profileData || !currentUserFollowings) return <Loader/>
     return (
@@ -78,13 +106,22 @@ const Profile = () => {
                     <div className={"w-3/5"}>
                         <div className={"flex justify-between mb-5"}>
                             <span className={"font-bold text-2xl"}>{profileData.login}</span>
-                            {
-                                id === currentUser.id &&
-                                <Button
-                                    onClick={() => navigate("/profile/edit")}
-                                    text={"Edit profile"}
-                                />
-                            }
+                            <div className={"flex gap-2"}>
+                                {
+                                    id === currentUser.id &&
+                                    <Button
+                                        onClick={logoutHandler}
+                                        text={"Logout"}
+                                    />
+                                }
+                                {
+                                    id === currentUser.id &&
+                                    <Button
+                                        onClick={() => navigate("/profile/edit")}
+                                        text={"Edit profile"}
+                                    />
+                                }
+                            </div>
                             {
                                 !(id === currentUser.id) && (doesCurrentUserFollows
                                     ?
@@ -118,16 +155,34 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
-                <div className={"my-8 overflow-x-auto hide-scrollbar grid grid-flow-col"}>
+                <div className={"my-8 overflow-x-auto hide-scrollbar grid grid-flow-col auto-cols-min"}>
                     {
-                        acutals.map(i => (
+                        profileData.actuals.reverse().map(i => (
                             <Actual
                                 key={i.id}
                                 name={i.name}
-                                mediaUrl={i.stories[0].mediaUrl}
+                                handleActualClick={() => handleActualClick(i)}
                             />
                         ))
                     }
+                    <ActualModal
+                        isActive={isActualsModalOpen}
+                        actualRefs={actualRefs}
+                        userId={id}
+                        setIsActive={setIsActualsModalOpen}
+                    />
+                    <div
+                        className={"rounded-full border border-emerald-400 w-20 h-20 mx-4 flex justify-center " +
+                            "items-center cursor-pointer text-3xl hover:text-4xl hover:border-2 transition-all"}
+                        onClick={() => setIsActualCreateModalOpen(true)}
+                    >
+                        <HiPlus className={"text-emerald-400"}/>
+                    </div>
+                    <ActualCreateForm
+                        fetchUserProfile={fetchUserProfile}
+                        setIsActive={setIsActualCreateModalOpen}
+                        isActive={isActualCreateModalOpen}
+                    />
                 </div>
             </div>
             <hr className={"border-emerald-300 my-5"}/>

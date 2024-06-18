@@ -43,7 +43,7 @@ const Main = () => {
             storyRefs.current[storyId].scrollIntoView({
                 behavior: "smooth",
                 block: "center",
-                inline: "nearest"
+                inline: "center"
             })
         }, 0)
     }
@@ -52,6 +52,8 @@ const Main = () => {
         setIsStoryModalActive(true)
         scrollToStory(story.id)
     }
+
+    console.log(posts)
 
     if (!posts || !stories) return <Loader/>
     return (
@@ -62,7 +64,7 @@ const Main = () => {
                 storyRefs={storyRefs}
                 setIsActive={setIsStoryModalActive}
             />
-            <div className={"overflow-x-auto grid grid-flow-col custom-scrollbar pb-4"}>
+            <div className={"overflow-x-auto grid grid-flow-col custom-scrollbar pb-4 auto-cols-min"}>
                 {
                     stories.map(i => (
                         <Story
@@ -75,7 +77,7 @@ const Main = () => {
                     ))
                 }
             </div>
-            <hr className={"border-emerald-300 mt-10"}/>
+            <hr className={"border-emerald-300 mt-5"}/>
             <InfiniteScroll
                 className={"py-24"}
                 dataLength={posts.length}
