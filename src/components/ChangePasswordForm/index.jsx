@@ -48,7 +48,7 @@ const ChangePasswordForm = (
                     />
                     <Button
                         text={"Cancel"}
-                        classNames={"text-emerald-600 bg-transparent border border-emerald-400 hover:text-white hover:bg-emerald-400 transition-all"}
+                        classNames={"!text-emerald-500 bg-transparent border border-emerald-400 hover:!text-white hover:bg-emerald-400 transition-all"}
                         onClick={() => {
                             reset()
                             navigate(-1)

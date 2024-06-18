@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react'
 import {requests} from "../../api/requests.js"
 import {Loader, Post} from "../../components"
 import InfiniteScroll from "react-infinite-scroll-component"
+import {useGetCurrentUser} from "../../hooks/index.js";
 
 const Interesting = () => {
     const [posts, setPosts] = useState([])
     const [page, setPage] = useState(1)
-    const [currentUserId, setCurrentUserId] = useState(0)
+    const currentUser = useGetCurrentUser()
     const [hasMorePosts, setHasMorePosts] = useState(true)
     const PAGE_SIZE = 10
+
 
     const fetchInterestingPosts = (currentPage) => {
         requests.getInterestingPosts(currentPage, PAGE_SIZE)
@@ -27,8 +29,6 @@ const Interesting = () => {
     }
 
     useEffect(() => {
-        requests.getCurrentUserProfile()
-            .then(res => setCurrentUserId(res.data.id))
         fetchInterestingPosts(page)
     }, [])
 
@@ -45,7 +45,7 @@ const Interesting = () => {
             {
                 posts.map(p => (
                     <Post
-                        currentUserId={currentUserId}
+                        currentUserId={currentUser.id}
                         key={p.id}
                         id={p.id}
                         mediaUrl={p.mediaUrl}
