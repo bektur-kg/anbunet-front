@@ -11,22 +11,18 @@ const SearchChat = ({setUserId,setLogin ,connection,setChatId, contacts}) => {
     }, [searchValue])
 
     const createChatHandler = async (userLogin,userId) => {
-
-
+        
                 setSearchValue("")
                 setFoundUsers(null)
                 setLogin(userLogin)
-
                 const contact = contacts.find(c => c.user.id === userId) 
                 if(contact){
                     setChatId(contact.chatId)
                 }else{
                     setChatId(null)
                 }
-
                 setUserId(userId)
                 await connection.invoke("GetContactsAsync")
-        
     }
 
     return (

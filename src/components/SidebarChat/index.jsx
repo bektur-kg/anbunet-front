@@ -7,8 +7,18 @@ const SidebarChat = ({ setUserId,setLogin, contacts, setContacts,connection ,set
     return (
         <div className='sidebar'>
             <NavbarChat />
-            <SearchChat contacts={contacts}setUserId={setUserId}setChatId={setChatId}setLogin={setLogin} setContacts={setContacts} connection={connection}/>
-            <Chats setChatId={setChatId} setLogin={setLogin} contacts={contacts} connection={connection} />
+            <SearchChat 
+            contacts={contacts}
+            setUserId={setUserId}
+            setChatId={setChatId}
+            setLogin={setLogin} 
+            setContacts={setContacts} 
+            connection={connection}/>
+            <Chats 
+            setChatId={setChatId} 
+            setLogin={setLogin} 
+            contacts={contacts} 
+            connection={connection} />
         </div>
     );
 };

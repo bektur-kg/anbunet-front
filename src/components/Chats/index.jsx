@@ -5,15 +5,12 @@ import {formatDateWithTime} from '../../helpers'
 
 const Chats = ({ contacts, connection ,setLogin,setChatId}) => {
 
-    // доделать
+
     const getChat = async (chatId,login) => {
-        console.log(chatId);
         setChatId(chatId)
         setLogin(login)
         await connection.invoke("GetChatsGroup", chatId)
-        
     }
-    // доделать
     if (!contacts) return <Loader />
     return (
         <div className='chats hide-scrollbar'>

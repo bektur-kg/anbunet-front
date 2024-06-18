@@ -9,8 +9,6 @@ const MessagesChat = ({ chat }) => {
         </div>
     );
 
-    console.log(chat);
-
     return (
         <div className='messages hide-scrollbar'>
             {

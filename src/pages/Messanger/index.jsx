@@ -7,15 +7,10 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 const Messanger = () => {
     const [connection, setConnection] = useState(null)
     const [contacts, setContacts] = useState(null)
-    const [chat, setChat] = useState(null)
     const [chats, setChats] = useState(null)
     const [chatId, setChatId] = useState(null)
     const [login,setLogin] = useState(null)
     const [userId,setUserId] = useState(null)
-
-    const update =async()=>{
-        await connection.invoke("GetChats")
-    }
 
     const joinChat = async () => {
         const token = localStorage.getItem('token');
@@ -24,29 +19,18 @@ const Messanger = () => {
             .withAutomaticReconnect()
             .build();
 
-
-        connection.on("SendMessageUser", (userName, message) => {
-            console.log(userName);
-            console.log(message);
-        })
-
         connection.on("Contacts", (contacts) => {
             
             setContacts(contacts)
         })
 
-
-
         connection.on("Chats", (chats) => {
-            console.log(chats);
             setChats(chats)
-            console.log(chatId);
         })
 
         connection.on("Update", async() => {
             await connection.invoke("GetChats")
             await connection.invoke("GetContactsAsync")
-            console.log("Update Chats");
         })
 
         try {
@@ -70,11 +54,17 @@ const Messanger = () => {
                  setUserId={setUserId}
                  setChatId={setChatId}
                  setLogin={setLogin}
-                  contacts={contacts} 
-                  setContacts={setContacts}
-                   connection={connection} 
+                 contacts={contacts} 
+                 setContacts={setContacts}
+                 connection={connection} 
                    />
-                <Chat setChatId={setChatId}userId={userId}chats={chats}chatId = {chatId}chat={chat} connection={connection} login={login}/>
+                <Chat 
+                 setChatId={setChatId}
+                 userId={userId}
+                 chats={chats}
+                 chatId = {chatId}
+                 connection={connection}
+                 login={login}/>
             </div>
         </div>
     );

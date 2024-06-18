@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { FaFileCirclePlus } from "react-icons/fa6";
 import { requests } from '../../api/requests';
 
-const InputChat = ({ setChatId,userId, connection, chat, chatId }) => {
+const InputChat = ({ setChatId,userId, connection, chatId }) => {
     const [message, setMessage] = useState("")
 
     const onSendMessage = async () => {
-        console.log(userId);
         if (!chatId) requests.createChat(userId).then(async (res) => {
             setChatId(res.data.chatId)
             await connection.invoke("SendMessage", res.data.chatId, message)
