@@ -10,6 +10,7 @@ const CreatePostForm = (
         isValid,
         errors,
         submitRequestHandler,
+        pre_function_input
         
     }) => {
 
@@ -30,7 +31,7 @@ const CreatePostForm = (
                         registerName={"file"}
                         register={register}
                         error={errors?.file?.message}
-                        pre_function={submitRequestHandler}
+                        pre_function={pre_function_input}
                     />
                     <LiveInput
                         inputType={"text"}
