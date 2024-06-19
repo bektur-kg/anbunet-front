@@ -12,6 +12,7 @@ function FollowersNumber({userId}) {
     const [followings, setFollowings] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [myFollowings, setMyFollowings] = useState([]);
+    const [myFollowings2, setMyFollowings2] = useState([]);
     const [mapper, setMapper] = useState([]);
     const [followingsNum, setFollowingsNum] = useState();
     const [followersNum, setFollowersNum] = useState();
@@ -41,7 +42,13 @@ function FollowersNumber({userId}) {
             const res2 = res.data.map((item) => item.id);
             setMyFollowings(res2);
         });
-    }, [userId, myFollowings]);
+    }, [userId, myFollowings2]);
+
+   
+
+    console.log(myFollowings)
+    console.log(myFollowings2)
+
   
     const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png";
   
@@ -69,7 +76,7 @@ function FollowersNumber({userId}) {
                                     </span>
                                 </span>
                                 <span className="text-blue-800 p-2 text-base ml-2 flex">
-                                    {myFollowings.includes(i.id) ? (
+                                    {myFollowings2.includes(i.id) ? (
                                         <span
                                             onClick={() => {
                                                 unFollowUser(i.id);
@@ -96,9 +103,10 @@ function FollowersNumber({userId}) {
                 </div>
             ))}
         </>
-    ), [followCounter, followers, myFollowings, followings, showModal]);
+    ), [followCounter, followers, myFollowings, followings, showModal, myFollowings2]);
   
     function openModal1() {
+        setMyFollowings2(myFollowings)
         setNumberOf(followers.length);
         setMapper(followers);
         setLabelOf(`Followers of ${userName}:`);
@@ -106,16 +114,25 @@ function FollowersNumber({userId}) {
     }
   
     function followUser(id) {
+        
         requests.followUser(id);
-        setFollowCounter(followCounter + 1);
+
+        if(followCounter===0){setMyFollowings2(myFollowings.concat(id));
+            setFollowCounter(1)
+        }
+        else {setMyFollowings2(myFollowings2.concat(id))}
+        
     }
   
     function unFollowUser(id) {
         requests.unfollowUser(id);
-        setFollowCounter(followCounter + 1);
+      if(followCounter===0){
+        setMyFollowings2(myFollowings.filter((word)=>word!=id));
+    setFollowCounter(1)} else {setMyFollowings2(myFollowings2.filter((word)=>word!=id));}
     }
   
     function openModal2() {
+        setMyFollowings2(myFollowings)
         setNumberOf(followings.length);
         setMapper(followings);
         setLabelOf(`${userName} is following:`);
