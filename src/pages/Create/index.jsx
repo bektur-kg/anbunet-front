@@ -15,6 +15,8 @@ const Create = () => {
           if (event.target.files && event.target.files[0]) {
             setImage(URL.createObjectURL(event.target.files[0]));
             console.log('1')
+            document.getElementsByTagName("html").focus();
+            resetPostForm
           } 
          
         } 
@@ -26,6 +28,8 @@ const Create = () => {
             setImage3(event.target.files[0].name)
             setImage2(URL.createObjectURL(event.target.files[0]));
             console.log('1')
+            document.getElementsByTagName("html").focus();
+            resetStoryForm()
           } 
          
         } 
@@ -62,6 +66,7 @@ const Create = () => {
     const createStoryHandler = ({file}) => {
         const formData = new FormData()
         formData.append("file", file[0])
+        setImage2('')
 
         requests.createStory(formData)
             .then(_ => setIsStoryCreated(true))
@@ -69,7 +74,7 @@ const Create = () => {
             .finally(resetStoryForm)
     }
 
-    console.log(image3.name)
+    console.log(image3)
 
     return (
         <div className={"px-20 py-24"}>
@@ -81,15 +86,16 @@ const Create = () => {
                 submitRequestHandler={createPostHandler}
                 pre_function_input={onImageChange}
             />
-            <div className={"text-red-400 mt-2 text-center"}>{responseError}</div>
+            <div className={"text-red-400 mt-2 text-center relative z-10"}>{responseError}</div>
+            {
+                isPostCreated &&
+                <div className={"text-emerald-400 text-xl mt-10 text-center relative z-10"}>Post Created Successfully! </div>
+                
+            }
            { image!=='./128px-placeholder.png'&&
            
             <div className={'flex justify-center'}> <img className={"max-w-sm    object-scale-down rounded-2xl"} alt="preview image" src={image} /></div>}
-            {
-                isPostCreated &&
-                <div className={"text-emerald-400 text-xl mt-10 text-center"}>Post Created Successfully! </div>
-                
-            }
+          
           
             <CreateStoryForm
                 register={storyRegister}
@@ -99,8 +105,13 @@ const Create = () => {
                 submitRequestHandler={createStoryHandler}
                 pre_function_input={onImageChange2}
             />
+
+{
+                isStoryCreated &&
+                <div className={"text-emerald-400 text-xl mt-10 text-center relative z-10"}>Story Created Successfully! </div>
+            }
        {
-  image2 && image3.includes('.mp4') ? (
+  image2 && image3.includes('.mp4') ? ( 
     <div className={'flex justify-center'}>
       <video controls className={"max-w-sm mt-5 object-scale-down rounded-2xl"} alt="preview image" src={image2}></video>
     </div>
@@ -114,10 +125,7 @@ const Create = () => {
 }
 
 
-            {
-                isStoryCreated &&
-                <div className={"text-emerald-400 text-xl mt-10 text-center"}>Story Created Successfully! </div>
-            }
+
         </div>
     )
 }
