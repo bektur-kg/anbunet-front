@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, FormInput } from '../index.js';
+import { Button, FormInput, LiveInput } from '../index.js';
 import {Link} from "react-router-dom";
+import { LoaderSmall } from '../index.js';
 
 const CreateAiPostForm = ({
   handleSubmit,
@@ -22,7 +23,7 @@ const CreateAiPostForm = ({
         </div>
         
         <div className="w-full flex flex-col">
-          <FormInput
+          <LiveInput
             inputType="text"
             registerName="prompt"
             placeholder="Your prompt to generate image..."
@@ -40,7 +41,7 @@ const CreateAiPostForm = ({
               
             />
           </div>
-          <FormInput
+          <LiveInput
             inputType="text"
             registerName="description"
             placeholder="Your description..."
@@ -49,6 +50,7 @@ const CreateAiPostForm = ({
             regexName="postDescription"
           />
         </div>
+        
         <h3 className=" font-medium mb-5">
             Wait for the image to appear befor posting...
           </h3>

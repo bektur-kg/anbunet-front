@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Button, FormInput} from "../index.js"
+import {Button, FormInput, LiveInput} from "../index.js"
 import {formRules} from "../../utils/formRules.js"
 import {Link} from "react-router-dom"
 
@@ -10,6 +10,8 @@ const CreatePostForm = (
         isValid,
         errors,
         submitRequestHandler,
+        pre_function_input
+        
     }) => {
 
     return (
@@ -22,15 +24,16 @@ const CreatePostForm = (
                     <h2 className={"text-3xl font-medium mb-14"}>Create Post</h2>
                 </div>
                 <div className={"w-full flex flex-col"}>
-                    <FormInput
+                    <LiveInput
                         inputType={"file"}
                         regexName={"postFile"}
                         placeholder={"Choose Your file"}
                         registerName={"file"}
                         register={register}
                         error={errors?.file?.message}
+                        pre_function={pre_function_input}
                     />
-                    <FormInput
+                    <LiveInput
                         inputType={"text"}
                         registerName={"description"}
                         placeholder={"Your description..."}

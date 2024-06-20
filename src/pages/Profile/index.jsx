@@ -204,7 +204,7 @@ const Profile = () => {
                                 <ProfilePost
                                     key={i.id}
                                     createdDate={i.createdDate}
-                                    mediaUrl={i.mediaUrl}
+                                    mediaUrl={"https://localhost:7199/".concat(`${i.mediaUrl}`).replace("https://localhost:7199/http", "http")}
                                     id={i.id}
                                     commentsCount={i.commentsCount}
                                     likesCount={i.likesCount}

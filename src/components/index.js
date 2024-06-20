@@ -32,6 +32,8 @@ import ProfileStoriesModal from './ProfileStoriesModal'
 import ActualCreateForm from './ActualCreateForm'
 import ActualModal from './ActualModal'
 import ActualCard from './ActualCard'
+import LiveInput from './LiveInput'
+import LoaderSmall from './LoaderSmall'
 
 export{
     Logo,
@@ -62,7 +64,9 @@ export{
     PostComment,
     ProfilePost,
     CreateAiPostForm,
+    LiveInput,
     FollowersNumber,
+    LoaderSmall,
     CreateStoryForm,
     ProfileStoriesModal,
     ActualCreateForm,
