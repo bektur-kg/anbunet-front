@@ -5,13 +5,26 @@ import {requests} from "../../api/requests.js"
 
 const Create = () => {
 
-    const [image, setImage] = useState('./128px-placeholder.png');  
+    const [image, setImage] = useState('./128px-placeholder.png'); 
+    const [image2, setImage2] = useState('');   
+    const [image3, setImage3] = useState('');   
 
     const onImageChange = (event) => {
         if (event) {
           console.log(event);
           if (event.target.files && event.target.files[0]) {
             setImage(URL.createObjectURL(event.target.files[0]));
+            console.log('1')
+          } 
+         
+        } 
+      };
+      const onImageChange2 = (event) => {
+        if (event) {
+          console.log(event);
+          if (event.target.files && event.target.files[0]) {
+            setImage3(event.target.files[0].name)
+            setImage2(URL.createObjectURL(event.target.files[0]));
             console.log('1')
           } 
          
@@ -56,6 +69,8 @@ const Create = () => {
             .finally(resetStoryForm)
     }
 
+    console.log(image3.name)
+
     return (
         <div className={"px-20 py-24"}>
             <CreatePostForm
@@ -82,7 +97,23 @@ const Create = () => {
                 handleSubmit={storyHandleSubmit}
                 isValid={isValidStoryForm}
                 submitRequestHandler={createStoryHandler}
+                pre_function_input={onImageChange2}
             />
+       {
+  image2 && image3.includes('.mp4') ? (
+    <div className={'flex justify-center'}>
+      <video controls className={"max-w-sm mt-5 object-scale-down rounded-2xl"} alt="preview image" src={image2}></video>
+    </div>
+  ) : (
+    image2 && (
+      <div className={'flex justify-center'}>
+        <img className={"max-w-sm mt-5 object-scale-down rounded-2xl"} alt="preview image" src={image2} />
+      </div>
+    )
+  )
+}
+
+
             {
                 isStoryCreated &&
                 <div className={"text-emerald-400 text-xl mt-10 text-center"}>Story Created Successfully! </div>
