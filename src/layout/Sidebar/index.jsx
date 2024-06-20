@@ -6,7 +6,7 @@ import styles from './Sidebar.module.scss'
 
 const Sidebar = () => {
     return (
-        <div className={`${styles.root} w-1/6 h-screen bg-green-300 flex flex-col justify-around items-center fixed`}>
+        <div className={`${styles.root} w-1/6 h-screen bg-purple-extra-dark flex flex-col justify-around items-center fixed`}>
             <Logo/>
             <div className={"w-full"}>
                 <nav className={"w-full"}>
@@ -16,9 +16,9 @@ const Sidebar = () => {
                                 <NavLink
                                     key={id}
                                     to={path}
-                                    className={({isActive}) => cn("text-lg font-medium w-full h-10 py-6 px-10 rounded flex items-center justify-between ",
+                                    className={({isActive}) => cn("text-lg text-purple-extra-light font-medium w-full h-10 py-6 px-10 rounded flex items-center justify-between",
                                         {
-                                            ["bg-blue-500"]: isActive,
+                                            ["bg-purple-light"]: isActive,
                                             ["text-white"]: isActive
                                         })}
                                 >

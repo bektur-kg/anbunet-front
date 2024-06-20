@@ -12,7 +12,7 @@ const Actual = (
     return (
         <div
             onClick={handleActualClick}
-            className={"flex justify-center items-center text-xs w-20 h-20 mx-4 rounded-full bg-emerald-400 cursor-pointer transition-all"}
+            className={"flex justify-center items-center text-xs w-20 h-20 mx-4 rounded-full bg-purple-light cursor-pointer transition-all"}
         >
             <span className={"font-medium text-white"}>{name}</span>
         </div>

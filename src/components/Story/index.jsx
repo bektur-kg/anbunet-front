@@ -11,7 +11,7 @@ const Story = (
         <div
             onClick={onClick}
             className={"flex cursor-pointer flex-col items-center text-sm gap-1 font-medium"}>
-            <div className={"w-20 h-20 mx-4 rounded-full border border-emerald-400"}>
+            <div className={"w-20 h-20 mx-4 rounded-full border border-purple-light"}>
                 <img
                     src={profilePicture ? profilePicture : "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"}
                     alt="storyImage"

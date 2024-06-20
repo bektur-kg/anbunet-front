@@ -34,15 +34,13 @@ const PostModalWindow = (
         fetchComments()
     }, [])
 
-
-
     useEffect(() => {
         lockWindowScrollInModal(isActive)
     }, [isActive])
 
     return (
         <div
-            className={cn("bg-emerald-950/60 top-0 left-0 p-20 w-full h-full fixed transition-all z-10", {hidden: !isActive})}>
+            className={cn("bg-purple-extra-dark/70 top-0 left-0 p-20 w-full h-full fixed transition-all z-10", {hidden: !isActive})}>
             <div className={"bg-white p-10 rounded flex gap-10 justify-center items-center w-full h-full"}>
                 <div className={"w-1/2 h-full"}>
                     {
@@ -95,7 +93,7 @@ const PostModalWindow = (
                             value={newComment}
                         />
                         <button
-                            className={"bg-emerald-400 py-2 px-3"}
+                            className={"bg-purple-light py-2 px-3"}
                             onClick={handleSendComment}
                         >
                             <IoIosSend  className={"text-lg text-white"}/>
@@ -106,7 +104,7 @@ const PostModalWindow = (
             <div className={"w-10 h-10 absolute top-0 right-0 flex items-center justify-center"}>
                  <span
                      onClick={() => setIsActive(false)}
-                     className={"text-emerald-100 text-5xl cursor-pointer"}
+                     className={"text-purple-100 text-5xl cursor-pointer"}
                  >&times;</span>
             </div>
         </div>

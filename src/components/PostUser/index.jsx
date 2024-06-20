@@ -16,7 +16,7 @@ const PostUser = (
         >
             <div>
                 <img
-                    className={"w-10 h-10 rounded-full object-cover border border-emerald-400"}
+                    className={"w-10 h-10 rounded-full object-cover border border-purple-light"}
                     src={profilePicture ? profilePicture : "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"}
                     alt="profile"
                 />

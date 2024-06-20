@@ -52,15 +52,16 @@ function FollowersNumber({userId}) {
                         <>
                             <ProfilePicture url={i.profilePicture ? i.profilePicture : url}/>
                             <span
-                                className="text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5">
-                <span
-                    onClick={() => {
-                        navigate(`/profile/${i.id}`)
-                        setShowModal(false)
-                    }}
-                >
-                    {i.login}
-                </span>
+                                className="text-black-800 font-bold text-xl hover:text-blue-800 hover:underline text-center ml-5"
+                            >
+                            <span
+                                onClick={() => {
+                                    navigate(`/profile/${i.id}`)
+                                    setShowModal(false)
+                                }}
+                            >
+                                {i.login}
+                            </span>
                                 <span
                                     className={"text-blue-800 text-base ml-2"}
                                 >
@@ -80,9 +81,10 @@ function FollowersNumber({userId}) {
                                         </span>
                                     }
                                 </span>
-              </span>
+                            </span>
                         </>
-                    )}
+                    )
+                    }
                 </div>
             ))}
         </>
@@ -116,13 +118,13 @@ function FollowersNumber({userId}) {
     return (
         <>
             <div className={"flex pl-1 items-center gap-1 cursor-pointer"}>
-        <span className={"font-bold text-emerald-500"} onClick={openModal1}>
+        <span className={"font-bold text-purple-500"} onClick={openModal1}>
           {followersNum}
         </span>
                 <span onClick={openModal1}>followers</span>
             </div>
             <div className={"flex pl-1 items-center gap-1 cursor-pointer"}>
-        <span className={"font-bold text-emerald-500"} onClick={openModal2}>
+        <span className={"font-bold text-purple-500"} onClick={openModal2}>
           {followingsNum}
         </span>
 

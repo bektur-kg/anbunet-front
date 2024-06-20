@@ -12,6 +12,7 @@ import {requests} from "../../api/requests.js"
 import {useNavigate, useParams} from "react-router-dom"
 import {useGetCurrentUser} from "../../hooks/index.js"
 import {HiPlus} from "react-icons/hi"
+import styles from './Profile.module.scss'
 
 const Profile = () => {
     const [profileData, setProfileData] = useState()
@@ -87,13 +88,13 @@ const Profile = () => {
 
     if (!profileData || !currentUserFollowings) return <Loader/>
     return (
-        <div className={"px-20 py-24 w-3/5 mx-auto"}>
+        <div className={`px-20 py-24 w-3/5 mx-auto ${styles.root}`}>
             <div>
                 <div className={"flex justify-between w-3/4 mx-auto"}>
                     <div className={"w-1/4"}>
                         <img
                             onClick={() => setIsStoriesModalOpen(true)}
-                            className={"w-32 h-32 rounded-full border-2 border-emerald-400 object-cover cursor-pointer"}
+                            className={"w-32 h-32 rounded-full border-2 border-purple-light object-cover cursor-pointer"}
                             src={profileData?.profilePicture ? profileData.profilePicture : "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"}
                             alt="avatar"
                         />
@@ -137,7 +138,7 @@ const Profile = () => {
                         </div>
                         <div className={"flex justify-between w-full"}>
                             <div className={"flex items-center gap-1"}>
-                                <span className={"font-bold text-emerald-500"}>{profileData.posts.length}</span>
+                                <span className={"font-bold text-purple-500"}>{profileData.posts.length}</span>
                                 <span>posts</span>
                             </div>
                             <FollowersNumber userId={id}/>
@@ -171,13 +172,17 @@ const Profile = () => {
                         userId={id}
                         setIsActive={setIsActualsModalOpen}
                     />
-                    <div
-                        className={"rounded-full border border-emerald-400 w-20 h-20 mx-4 flex justify-center " +
-                            "items-center cursor-pointer text-3xl hover:text-4xl hover:border-2 transition-all"}
-                        onClick={() => setIsActualCreateModalOpen(true)}
-                    >
-                        <HiPlus className={"text-emerald-400"}/>
-                    </div>
+                    {
+                        currentUser.id === id && (
+                            <div
+                                className={"rounded-full border border-purple-light w-20 h-20 mx-4 flex justify-center " +
+                                    "items-center cursor-pointer text-3xl hover:text-4xl hover:border-2 transition-all"}
+                                onClick={() => setIsActualCreateModalOpen(true)}
+                            >
+                                <HiPlus className={"text-purple-light"}/>
+                            </div>
+                        )
+                    }
                     <ActualCreateForm
                         fetchUserProfile={fetchUserProfile}
                         setIsActive={setIsActualCreateModalOpen}

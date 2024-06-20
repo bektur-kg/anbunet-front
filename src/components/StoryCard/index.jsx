@@ -60,7 +60,7 @@ const StoryCard = (
             </div>
             <div className={"flex justify-center my-2 items-center gap-2 "}>
                 <button
-                    className={cn("bg-green-400 px-2 py-1 rounded", {["opacity-50 cursor-not-allowed"]: currentMedia === 0})}
+                    className={cn("bg-purple-600 px-2 py-1 rounded", {["opacity-50 cursor-not-allowed"]: currentMedia === 0})}
                     onClick={() => setCurrentMedia(prevState => --prevState)}
                     disabled={currentMedia === 0}
                 >
@@ -71,7 +71,7 @@ const StoryCard = (
                 </span>
 
                 <button
-                    className={cn("bg-green-400 px-2 py-1 rounded", {["opacity-50 cursor-not-allowed"]: currentMedia === mediaUrlList.length - 1})}
+                    className={cn("bg-purple-600 px-2 py-1 rounded", {["opacity-50 cursor-not-allowed"]: currentMedia === mediaUrlList.length - 1})}
                     onClick={() => setCurrentMedia(prevState => ++prevState)}
                     disabled={currentMedia === mediaUrlList.length - 1}
                 >

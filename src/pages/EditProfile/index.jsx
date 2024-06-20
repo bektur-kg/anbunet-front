@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 import {ChangePasswordForm, EditProfileForm} from "../../components"
-import {useForm} from "react-hook-form";
-import {requests} from "../../api/requests.js";
-import login from "../Login/index.jsx";
-import {useNavigate} from "react-router-dom";
-import {hasNonNullProperty} from "../../helpers/hasNonNullProperty.js";
+import {useForm} from "react-hook-form"
+import {requests} from "../../api/requests.js"
+import {useNavigate} from "react-router-dom"
+import {hasNonNullProperty} from "../../helpers"
 
 const EditProfile = () => {
     const {
@@ -14,6 +13,7 @@ const EditProfile = () => {
         reset: resetProfileForm,
     } = useForm({mode: 'onChange'})
 
+    console.log(isValidProfileForm)
     const {
         register: registerPassword,
         handleSubmit: handleSubmitPassword,

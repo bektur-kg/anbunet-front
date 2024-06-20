@@ -53,8 +53,6 @@ const Main = () => {
         scrollToStory(story.id)
     }
 
-    console.log(posts)
-
     if (!posts || !stories) return <Loader/>
     return (
         <div className={"px-20 py-24"}>
@@ -77,7 +75,7 @@ const Main = () => {
                     ))
                 }
             </div>
-            <hr className={"border-emerald-300 mt-5"}/>
+            <hr className={"border-purple-extra-light mt-5"}/>
             <InfiniteScroll
                 className={"py-24"}
                 dataLength={posts.length}

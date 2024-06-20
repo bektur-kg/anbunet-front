@@ -48,7 +48,7 @@ const ProfilePost = (
                             />
                     }
                 </div>
-                <div className={"flex gap-2 text-emerald-600"}>
+                <div className={"flex gap-2 text-purple-light"}>
                     <div className={"flex items-center"}>
                         <CiHeart className={"text-xl"}/>
                         <span>{likesCount}</span>

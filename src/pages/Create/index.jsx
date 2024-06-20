@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {CreatePostForm, CreateStoryForm} from "../../components"
 import {useForm} from "react-hook-form"
 import {requests} from "../../api/requests.js"
@@ -32,6 +32,18 @@ const Create = () => {
             .finally(resetPostForm)
     }
 
+    useEffect(() => {
+        setTimeout(() => {
+            setIsPostCreated(false)
+        }, 3000)
+    }, [isPostCreated])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsStoryCreated(false)
+        }, 3000)
+    }, [isStoryCreated])
+
     const createStoryHandler = ({file}) => {
         const formData = new FormData()
         formData.append("file", file[0])
@@ -54,7 +66,7 @@ const Create = () => {
             <div className={"text-red-400 mt-10 text-center"}>{responseError}</div>
             {
                 isPostCreated &&
-                <div className={"text-emerald-400 text-xl mt-10 text-center"}>Post Created Successfully! </div>
+                <div className={"text-emerald-400 text-xl mt-10 text-center mb-5"}>Post Created Successfully! </div>
             }
             <CreateStoryForm
                 register={storyRegister}

@@ -14,10 +14,10 @@ const Button = (
         <button
             onClick={onClick}
             type={type}
-            className={cn(`py-2 px-4 rounded text-white bg-emerald-400 ${classNames}`, {
+            className={cn(`py-2 px-4 rounded text-white bg-purple-light ${classNames}`, {
                 ["pointer-events-none"]: !isActive && isActive !== undefined,
                 ["cursor-not-allowed"]: !isActive && isActive !== undefined,
-                ["bg-emerald-200/90"]: !isActive && isActive !== undefined
+                ["bg-purple-light/50"]: !isActive && isActive !== undefined
             })}
         >
             {text}

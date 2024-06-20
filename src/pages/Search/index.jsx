@@ -1,69 +1,67 @@
-import React, { useEffect, useState } from "react";
-import { Button, Loader, Post } from "../../components";
-import { requests } from "../../api/requests.js";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
-import SearchForm from "../../components/SearchForm/index.jsx";
-import { Link } from "react-router-dom";
-import ProfilePicture from "../../components/ProfilePicture/ProfilePicture.jsx";
-import { useDebounce } from "@uidotdev/usehooks";
+import React, { useEffect, useState } from "react"
+import { requests } from "../../api/requests.js"
+import { useForm } from "react-hook-form"
+import SearchForm from "../../components/SearchForm/index.jsx"
+import { Link, useNavigate } from "react-router-dom"
+import ProfilePicture from "../../components/ProfilePicture/ProfilePicture.jsx"
+import { useDebounce } from "@uidotdev/usehooks"
 
 const Search = () => {
-  const myId = localStorage.getItem("id");
-  const [searchResults, setSearchResults] = useState([]);
-  const [followings, setFollowings] = useState([]);
-  const [login2, setLogin2] = useState("");
+  const myId = localStorage.getItem("id")
+  const [searchResults, setSearchResults] = useState([])
+  const [followings, setFollowings] = useState([])
+  const [login2, setLogin2] = useState("")
   const {
     register,
     handleSubmit,
     formState: { isValidProfileForm, errors },
     reset,
-  } = useForm({ mode: "onChange" });
-  const [responseError, setResponseError] = useState("");
-  const navigate = useNavigate();
+  } = useForm({ mode: "onChange" })
+  const [responseError, setResponseError] = useState("")
+  const navigate = useNavigate()
 
-const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"
+  const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png"
 
   const onInputChange = (event) => {
     if (event) {
       if (event.target.value && event.target.value) {
-        const value = event.target.value;
+        const value = event.target.value
         if (login2 != value) {
-          setLogin2(value);
+          setLogin2(value)
           //   debouncedonInputChange();
         }
       }
-    } else null;
+    } else null
   };
 
   const searchUser2 = () => {
-    requests.getUserSearch(login2).then((res) => setSearchResults(res.data));
+    requests.getUserSearch(login2).then((res) => setSearchResults(res.data))
   };
-  const debouncedonInputChange = useDebounce(login2, 500);
+  const debouncedonInputChange = useDebounce(login2, 500)
   //   const debouncedonInputChange2 = useDebounce(onInputChange, 300);
   const submitRequestHandler = ({ login }) => {
     const data = {
       login,
-    };
-  };
+    }
+  }
 
   const searchUser = ({ login }) => {
-    requests.getUserSearch(login).then((res) => setSearchResults(res.data));
-  };
+    requests.getUserSearch(login).then((res) => setSearchResults(res.data))
+  }
 
 
   useEffect(() => {
     if (login2) {
-      searchUser2();
+      searchUser2()
     }
-  }, [debouncedonInputChange]);
+  }, [debouncedonInputChange])
 
   useEffect(() => {
     requests.getUserFollowings(myId).then((res) => {
       const res2 = res.data.map(item => item.id)
       setFollowings(res2);
-    });
-  }, []);
+    })
+  }, [])
 
   // if(!searchResults) return <Loader/>
   return (
@@ -101,7 +99,7 @@ const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-ava
                   to={`/profile/${i.id}`}
                 >
                   {i.login} <span className={
-                    "text-gray-500 text-base "
+                    "text-gray-500 text-base"
                   }>{followings.includes(i.id)?'subscribed':""}</span>
                 </Link>
               </>
@@ -110,7 +108,7 @@ const url = "https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-ava
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

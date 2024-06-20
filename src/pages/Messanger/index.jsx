@@ -49,7 +49,7 @@ const Messanger = () => {
 
     return (
         <div className='home w-full h-screen flex justify-center items-center bg-purple-bg'>
-            <div className="container">
+            <div className="chat-container">
                 <SidebarChat
                  setUserId={setUserId}
                  setChatId={setChatId}

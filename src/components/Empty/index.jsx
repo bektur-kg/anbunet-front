@@ -7,8 +7,8 @@ const Empty = (
     }) => {
     return (
         <div className={"flex flex-col items-center gap-3"}>
-            <ImFilesEmpty className={"text-8xl text-emerald-300"}/>
-            <span className={"text-2xl text-emerald-400"}>{text}</span>
+            <ImFilesEmpty className={"text-8xl text-purple-light"}/>
+            <span className={"text-2xl text-purple-light"}>{text}</span>
         </div>
     );
 };
