@@ -5,8 +5,7 @@ import {
     Loader,
     Actual,
     ProfilePost,
-    FollowersNumber,
-    ProfileStoriesModal, ActualCreateForm, ActualModal
+    ProfileStoriesModal, ActualCreateForm, ActualModal, UserFollowsModal
 } from "../../components"
 import {requests} from "../../api/requests.js"
 import {useNavigate, useParams} from "react-router-dom"
@@ -21,6 +20,10 @@ const Profile = () => {
     const [isStoriesModalOpen, setIsStoriesModalOpen] = useState(false)
     const [isActualsModalOpen, setIsActualsModalOpen] = useState(false)
     const [isActualCreateModalOpen, setIsActualCreateModalOpen] = useState(false)
+    const [isUserFollowersModalOpen, setIsUserFollowersModalOpen] = useState(false)
+    const [isUserFollowingsModalOpen, setIsUserFollowingsModalOpen] = useState(false)
+    const [userFollowers, setUserFollowers] = useState([])
+    const [userFollowings, setUserFollowings] = useState([])
     const actualRefs = useRef({})
     const navigate = useNavigate()
     const {id} = useParams()
@@ -28,6 +31,11 @@ const Profile = () => {
 
     const fetchUserProfile = () => {
         requests.getUserProfile(id).then(res => setProfileData(res.data))
+    }
+
+    const fetchUserFollows = () => {
+        requests.getUserFollowings(id).then(res => setUserFollowings(res.data))
+        requests.getUserFollowers(id).then(res => setUserFollowers(res.data))
     }
 
     const fetchCurrentUserFollowings = () => {
@@ -40,26 +48,23 @@ const Profile = () => {
     useEffect(() => {
         fetchCurrentUserFollowings()
         fetchUserProfile()
+        fetchUserFollows()
     }, [id])
 
     const handleFollow = () => {
         requests.followUser(id).then(() => {
             fetchUserProfile()
             fetchCurrentUserFollowings()
+            fetchUserFollows()
         })
-
-        //TODO: FIX FOR AUTOMATIC STATE CHANGING
-        window.location.reload()
     }
 
     const handleUnfollow = () => {
         requests.unfollowUser(id).then(() => {
             fetchUserProfile()
             fetchCurrentUserFollowings()
+            fetchUserFollows()
         })
-
-        //TODO: FIX FOR AUTOMATIC STATE CHANGING
-        window.location.reload()
     }
 
     const logoutHandler = () => {
@@ -141,7 +146,38 @@ const Profile = () => {
                                 <span className={"font-bold text-purple-500"}>{profileData.posts.length}</span>
                                 <span>posts</span>
                             </div>
-                            <FollowersNumber userId={id}/>
+                            <div
+                                className={"flex items-center gap-1 cursor-pointer"}
+                                onClick={() => {
+                                    setIsUserFollowingsModalOpen(false)
+                                    setIsUserFollowersModalOpen(true)
+                                }}
+                            >
+                                <span className={"font-bold text-purple-500"}>{profileData.followersCount}</span>
+                                <span>followers</span>
+                            </div>
+                            <div
+                                className={"flex items-center gap-1 cursor-pointer"}
+                                onClick={() => {
+                                    setIsUserFollowersModalOpen(false)
+                                    setIsUserFollowingsModalOpen(true)
+                                }}
+                            >
+                                <span className={"font-bold text-purple-500"}>{profileData.followingsCount}</span>
+                                <span>followings</span>
+                            </div>
+                            <UserFollowsModal
+                                isActive={isUserFollowersModalOpen}
+                                title={"Followers"}
+                                follows={userFollowers}
+                                setIsActive={setIsUserFollowersModalOpen}
+                            />
+                            <UserFollowsModal
+                                isActive={isUserFollowingsModalOpen}
+                                title={"Followings"}
+                                follows={userFollowings}
+                                setIsActive={setIsUserFollowingsModalOpen}
+                            />
                         </div>
                         <div className={"mt-4"}>
                             <div className={"text-sm italic"}>{profileData.fullname}</div>
